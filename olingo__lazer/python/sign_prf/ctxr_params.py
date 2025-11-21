@@ -7,16 +7,27 @@ ringdim = 256
 
 q_small = 2101003516513793
 
+moddimEnc = 38
+secdimEnc = 38
+mhat = 38
+
 moddimEnc = 22
 secdimEnc = 22
 mhat = 22
-q = 633544653872304603170707504554316801
+
+q = 633544653872304603170707504554316801 # 128 sec
+#q = 1665928971017885857758033605809930753 # 192 sec
+#q = 4015297092641499797387712543978426881 # 256 sec
+
+moddim = 11
+secdim = 10
 
 moddim = 6
 secdim = 6
+
 # sigma_w = 2**38 for signing keygen proof, sigma_w = 2**20 for keygen proof
-# sigma_w = 2**38 
-sigma_w = 2**20 # Actually sigma_y
+sigma_w = 2**38 
+# sigma_w = 2**20
 
 rej_rate = 0.01
 tail_bound_2 = 1.01

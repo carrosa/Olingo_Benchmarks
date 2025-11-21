@@ -62,11 +62,7 @@ void montgomery_reduce(mpz_t r, mpz_t a)
 
   // r = (a - tmp) >> MONT_BITS
   mpz_sub(r, a, tmp);
-  mpz_fdiv_q_2exp(r, r, MPBITCNT_MONT_BITS);
-
-  // Ensure result is in [0, Q-1] // It should be in this range now anyway, I don't think this is required.
-  // if (mpz_cmp(r, GMP_Q) >= 0)
-  //   mpz_sub(r, r, GMP_Q);
+  mpz_fdiv_q_2exp(r, r, MONT_BITS);
 
   mpz_clears(t, tmp, NULL);
 }

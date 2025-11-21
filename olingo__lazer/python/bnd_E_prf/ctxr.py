@@ -6,6 +6,7 @@ from lazer import *  # import LaZer Python module
 import hashlib  # for SHAKE128
 from lazer import lin_prover_state_t, lin_verifier_state_t  # Explicit import
 from _ctxr_params_cffi import lib
+from ctxr_params import k, n, l, deg, qhat, sigma_tdec
 
 
 def decompose_vector(m: polyvec_t, B: int, ring: polyring_t):
@@ -36,7 +37,6 @@ def check_large_coeffs(label, vec, qhat):
 
 def main():
     # === Setup ===
-    from ctxr_params import deg, qhat, sigma_tdec, dim
 
     seed = b"\0" * 32  # public randomness (proof seed)
     prover = lin_prover_state_t(seed, lib.get_params("param"))
@@ -52,27 +52,27 @@ def main():
 
     one_pol = poly_t(Rqhat, [1] + [0] * (deg - 1))  # Polynomial with one in the first coefficient
     
-    A1_prime = polymat_t.urandom_static(Rqhat, 1, 24, qhat, seed_1, 0)
-    A1 = polymat_t(Rqhat, 1, 25, [one_pol, A1_prime])
-    A_top_right = polymat_t(Rqhat, 1, 22)
-    A_top = polymat_t(Rqhat, 1, 47, [A1, A_top_right])
+    A1_prime = polymat_t.urandom_static(Rqhat, n, k-1, qhat, seed_1, 0)
+    A1 = polymat_t(Rqhat, n, k, [one_pol, A1_prime])
+    A_top_right = polymat_t(Rqhat, n, l)
+    A_top = polymat_t(Rqhat, n, k+l, [A1, A_top_right])
 
-    A2_prime = polymat_t.urandom_static(Rqhat, 22, 2, qhat, seed_2, 0)
-    A2_mid = polymat_t.identity(Rqhat, 22)
-    A2_left = polymat_t(Rqhat, 22, 1)
-    A2 = polymat_t(Rqhat, 22, 25, [A2_left, A2_mid, A2_prime])
-    I22 = polymat_t.identity(Rqhat, 22)
-    A_bot = polymat_t(Rqhat, 22, 47, [A2, I22])
+    A2_prime = polymat_t.urandom_static(Rqhat, l, k-l-n, qhat, seed_2, 0)
+    A2_mid = polymat_t.identity(Rqhat, l)
+    A2_left = polymat_t(Rqhat, l, n)
+    A2 = polymat_t(Rqhat, l, k, [A2_left, A2_mid, A2_prime])
+    I22 = polymat_t.identity(Rqhat, l)
+    A_bot = polymat_t(Rqhat, l, k+l, [A2, I22])
     
-    A = polymat_t(Rqhat, 23, 47)
-    for row in range(1, 23):
+    A = polymat_t(Rqhat, l+n, k+l)
+    for row in range(1, l+n):
         A.set_row(row, A_bot.get_row(row - 1))
     A.set_row(0, A_top.get_row(0))
 
     # Binary
-    r = polyvec_t.urandom_bnd_static(Rqhat, 25, 0, 1, seed_3, 0)
-    E = polyvec_t.grandom_static(Rqhat, 22, int(log2o), seed_4, 0)
-    w = polyvec_t(Rqhat, 47, [r, E])
+    r = polyvec_t.urandom_bnd_static(Rqhat, k, 0, 1, seed_3, 0)
+    E = polyvec_t.grandom_static(Rqhat, l, int(log2o), seed_4, 0)
+    w = polyvec_t(Rqhat, k+l, [r, E])
     
     t = A*w
 
