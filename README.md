@@ -26,7 +26,8 @@ The folders for our benchmarks:
 
 * python/bnd_E_prf - norm bound proof of E with sigma_tdec (norm bound proof of pi_dsi)
 * python/dkg_prf1 - prove norm bound of S for dkg (norm bound proof for pi_{KGen_E}
-* python/sign_prf - prooving pi_r and pi_si (with sigma=2**38 and 2**20 respectively)
+* python/pi_r - proving pi_r (sigma=2^38, otherwise same as pi_si)
+* python/pi_si - proving pi_si (sigma=2^20, otherwise same as pi_r)
 
 To build each of the benchmarks, run `make` in their respective folders.
 
