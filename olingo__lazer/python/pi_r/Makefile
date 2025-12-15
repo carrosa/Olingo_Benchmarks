@@ -6,7 +6,7 @@ _ctxr_params_cffi.o: ctxr_params.h ../_lazer_cffi.o
 	python3 ../params_cffi_build.py ctxr_params.h ../..
 
 ctxr_params.h: ctxr_params.py
-	cd ../../scripts && sage lin-codegen.sage ../python/ctxr2/ctxr_params.py > ../python/ctxr2/ctxr_params.h
+	cd ../../scripts && sage lin-codegen.sage ../python/pi_r/ctxr_params.py > ../python/pi_r/ctxr_params.h
 
 ../_lazer_cffi.o:
 	cd .. && make
