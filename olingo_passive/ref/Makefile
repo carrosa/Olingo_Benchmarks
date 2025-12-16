@@ -1,6 +1,9 @@
 CC ?= /usr/bin/cc
+THRESHOLD ?=
+USERS ?=
+DEFINES ?= -DTHRESHOLD=$(THRESHOLD) -DUSERS=$(USERS)
 CFLAGS += -Wall -Wextra -Wpedantic -Wmissing-prototypes -Wredundant-decls \
-  -Wshadow -Wvla -Wpointer-arith -O3 -fomit-frame-pointer
+  -Wshadow -Wvla -Wpointer-arith -O3 -fomit-frame-pointer $(DEFINES)
 NISTFLAGS += -Wno-unused-result -O3 -fomit-frame-pointer
 SOURCES = sign.c packing.c polyvec.c poly.c ntt.c reduce.c rounding.c
 HEADERS = config.h params.h api.h sign.h packing.h polyvec.h poly.h ntt.h \
@@ -14,16 +17,8 @@ KECCAK_HEADERS256 = $(HEADERS256) fips202.h
 BENCH_HEADERS = test/bench.h test/cpu_freq_runtime.h
 BENCH_SOURCES = test/bench.c test/cpu_freq_runtime.c
 
-BFLAGS = -O3 -fomit-frame-pointer -march=native -flto -ftree-vectorize
+BFLAGS = -O3 -fomit-frame-pointer -march=native -flto -ftree-vectorize $(DEFINES)
 
-# PLATFORM ?= ntnu
-# ifeq ($(PLATFORM), caroline)
-# CPU_FREQ := 2600000000
-# else ifeq ($(PLATFORM), ntnu)
-# CPU_FREQ := 2294608000
-# else
-# $(error Unknown PLATFORM '$(PLATFORM)', must be 'caroline' or 'ntnu')
-# endif
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)

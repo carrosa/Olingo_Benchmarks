@@ -6,6 +6,9 @@ Passive signing benchmarks can be generated with `make ghkss`, from `test_GHKSS2
 Passive DKG and keygen benchmarks can be generated with `make bench`, from `benchmark_ghkss.c`.
 Both from within the `ref` folder. The binaries will be output into `ref/test`.
 
+To build with specific threshold, build using f.ex.:
+`make bench USERS=4 THRESHOLD=2`
+
 
 # Dilithium
 
