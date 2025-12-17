@@ -103,6 +103,9 @@ To build each of the benchmarks, run `make` in their respective folders.
 More information about requirements to run is found inside the folder `olingo__lazer`, in the file `lazer_getting_started.html` and in the github repository for lazer: https://github.com/lazer-crypto/lazer.
 
 
+# Estimating Olingo Security
+The scripts used to estimate hardness with our selected parameters can be found in the folder `lattice-estimator`.
+They depend on the lattice-estimator [github.com/malb/lattice-estimator](https://github.com/malb/lattice-estimator).
 
 # A warning to developers:
 __WARNING__: This is an academic proof of concept/benchmarking, and in particular has not received code review. This implementation is NOT ready for any type of production use.
