@@ -26,8 +26,8 @@ moddim = 6
 secdim = 6
 
 # sigma_w = 2**38 for signing keygen proof, sigma_w = 2**20 for keygen proof
-sigma_w = 2**38 
-# sigma_w = 2**20
+# sigma_w = 2**38 
+sigma_w = 2**20
 
 rej_rate = 0.01
 tail_bound_2 = 1.01
