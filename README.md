@@ -36,6 +36,12 @@ Or, you can build all benchmarking files for one set of users and threshold usin
 bash build.sh --users=<int> --threshold=<int>
 ```
 
+### NTT
+To compute zeta values for NTT, we used the script `compute_zetas.py` which has dependencies:
+- sage
+- argparse
+- numpy
+
 The information about requirements to run is found inside the folder `olingo_passive` or below.
 
 ### Prerequisites
