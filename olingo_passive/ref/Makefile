@@ -19,6 +19,26 @@ BENCH_SOURCES = test/bench.c test/cpu_freq_runtime.c
 
 BFLAGS = -O3 -fomit-frame-pointer -march=native -flto -ftree-vectorize $(DEFINES)
 
+ifdef DKG
+    BFLAGS += -DBENCH_DKG
+	BENCH_TARGET = test/dkg_$(USERS)_$(THRESHOLD)
+endif
+
+ifdef PREENC
+    BFLAGS += -DBENCH_AS_PREENC
+	BENCH_TARGET = test/preenc_$(USERS)_$(THRESHOLD)
+endif
+
+ifdef ENCRYPT
+    BFLAGS += -DBENCH_AS_ENCRYPT
+	BENCH_TARGET = test/encrypt_$(USERS)_$(THRESHOLD)
+endif
+
+ifdef AS2
+    BFLAGS += -DBENCH_AS_2
+	BENCH_TARGET = test/as2_$(USERS)_$(THRESHOLD)
+endif
+
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
@@ -29,33 +49,17 @@ endif
 
 .PHONY: all speed shared clean
 
-all: \
-  test/ghkss256 \
-  test/ghkss 
-
 ghkss: \
-  test/ghkss256 #\ 
-#   test/ghkss 
-
-gaussian:\
-  test/gaussian
+  test/ghkss256_$(USERS)_$(THRESHOLD)
 
 bench:\
-  test/speed
+  $(BENCH_TARGET)
 
-test/gaussian: gaussian_ref.c gaussian_ref.h cpucycles.c cpucycles.h fastrandombytes.c fastrandombytes.h randombytes.h randombytes.c
-	$(CC) $(CFLAGS) \
-	  -o $@ gaussian_ref.c cpucycles.c fastrandombytes.c randombytes.c -march=native -msse4.1 -maes -lgmp
-
-test/ghkss: test/test_GHKSS.c GHKSS.c GHKSS.h $(KECCAK_SOURCES) $(KECCAK_HEADERS)
-	$(CC) $(CFLAGS) \
-	  -o $@ test/test_GHKSS.c GHKSS.c randombytes.c $(KECCAK_SOURCES)
-
-test/ghkss256: test/test_GHKSS256.c GHKSS256.c GHKSS256.h $(KECCAK_SOURCES256) $(KECCAK_HEADERS256)
+test/ghkss256_$(USERS)_$(THRESHOLD): test/test_GHKSS256.c GHKSS256.c GHKSS256.h $(KECCAK_SOURCES256) $(KECCAK_HEADERS256)
 	$(CC) $(CFLAGS) \
 	  -o $@ test/test_GHKSS256.c GHKSS256.c $(KECCAK_SOURCES256) -lgmp -msse4.1 -maes -lm
 
-test/speed: test/benchmark_ghkss.c GHKSS256.c GHKSS256.h $(KECCAK_SOURCES256) $(KECCAK_HEADERS256) $(BENCH_HEADERS) $(BENCH_SOURCES)
+$(BENCH_TARGET): test/benchmark_ghkss.c GHKSS256.c GHKSS256.h $(KECCAK_SOURCES256) $(KECCAK_HEADERS256) $(BENCH_HEADERS) $(BENCH_SOURCES)
 	$(CC) $(BFLAGS) $(LDFLAGS) \
 	  -o $@ test/benchmark_ghkss.c GHKSS256.c $(KECCAK_SOURCES256) $(BENCH_SOURCES) -lgmp -lm
 
@@ -82,7 +86,11 @@ clean:
 	rm -f nistkat/PQCgenKAT_sign3
 	rm -f nistkat/PQCgenKAT_sign5
 	rm -f test/ghkss
-	rm -f test/ghkss256
+	rm -f test/ghkss256*
 	rm -f test/gaussian
 	rm -f test/speed
+	rm -f test/dkg*
+	rm -f test/preenc*
+	rm -f test/encrypt*
+	rm -f test/as2*
 

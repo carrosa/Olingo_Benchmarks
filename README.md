@@ -31,7 +31,7 @@ The folders for our benchmarks:
 
 To build each of the benchmarks, run `make` in their respective folders.
 
-More information about requirements to run is found inside the folder `lazer_with_python_proofs_for_olingo`, in the file `lazer_getting_started.html` and in the github repository for lazer: https://github.com/lazer-crypto/lazer
+More information about requirements to run is found inside the folder `olingo__lazer`, in the file `lazer_getting_started.html` and in the github repository for lazer: https://github.com/lazer-crypto/lazer.
 
 
 __WARNING__: This is an academic proof of concept/benchmarking, and in particular has not received code review. This implementation is NOT ready for any type of production use.

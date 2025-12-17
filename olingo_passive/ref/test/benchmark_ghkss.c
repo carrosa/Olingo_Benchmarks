@@ -683,10 +683,17 @@ int main(void)
     init_params();
     init_zetas();
 
-    // bench_dkg();
-    // bench_as_keygen_preenc(10);
-    // bench_as_keygen_encrypt_only(10);
-    bench_as_keygen_2(10);
+    #ifdef BENCH_DKG
+        bench_dkg();
+    #elif defined(BENCH_AS_PREENC)
+        bench_as_keygen_preenc(10);
+    #elif defined(BENCH_AS_ENCRYPT)
+        bench_as_keygen_encrypt_only(10);
+    #elif defined(BENCH_AS_2)
+        bench_as_keygen_2(10);
+    #else
+        printf("No benchmark selected. Use make with DKG, PREENC, ENCRYPT, or AS2\n");
+    #endif
 
     free_params();
     clear_zetas();
