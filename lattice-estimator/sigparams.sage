@@ -6,7 +6,8 @@ from estimator import *
 
 #security parameter
 
-secpar = 128
+secpar = 256
+
 print("Security level: ", secpar)
 
 
@@ -25,16 +26,16 @@ moddim = 0
 secdim = 0
 
 if secpar == 128: 
-	moddim = 6
-	secdim = 6
+	moddim = 7
+	secdim = 10
 
 if secpar == 192: 
-	moddim = 7
-	secdim = 8
+	moddim = 10
+	secdim = 13
 
 if secpar == 256: 
-	moddim = 7
-	secdim = 8
+	moddim = 12
+	secdim = 16
 
 # Setting cut-off point for truncated gaussian sampling
 
@@ -57,8 +58,8 @@ Q = 2**60
 # Bit-dropping parameters 
 
 if secpar==128:
-	kappa_y = 44
-	kappa_w = 47
+	kappa_y = 38
+	kappa_w = 41
 if secpar==192:
 	kappa_y = 36
 	kappa_w = 40
@@ -70,7 +71,7 @@ if secpar==256:
 
 
 if secpar==128:
-	sigma_r = 2**45
+	sigma_r = 2**38
 	sigma_s = 2**20
 if secpar==192:
 	sigma_r = 2**38
@@ -102,18 +103,21 @@ sigma = sqrt(1/(2/(n*sigma_s**2) + 2*B_HMLWE/(t*sigma_r**2)))
 
 B = e**(1/4) * (nu * sigma_s * n  + t * sigma_r)*sqrt(ringdim * (moddim + secdim)) + (nu * (2**kappa_y) + 2**(kappa_w+1)) * sqrt(ringdim * moddim)
 
+#print("B_2z =", log(B,2).n())
+
 B_STMSIS = B + sqrt(nu) + (nu * (2**(kappa_y)) + 2**(kappa_w + 1)) * sqrt(ringdim * moddim)
 #print("B_STMSIS = ", log(B_STMSIS,2).n(), "bits")
 
 B_MSIS = B_STMSIS - nu #Following Raccoon parameter selection recommendation
-#print(log(B_MSIS,2).n())
+
+print("B_MSIS bits =", log(B_MSIS,2).n())
 
 B_inf =  sqrt(ringdim) * tail_bound * sigma_s * sqrt(n) + tail_bound * sigma_r * sqrt(t)
 
 # Setting signature Modulus
 
 if secpar == 128:
-	logq = 62.19
+	logq = 56
 
 if secpar == 192:
 	logq = 56
@@ -144,7 +148,7 @@ print()
 assert(B_MSIS < (q-1)/2)
 
 #SIS for security
-sis_param = SIS.Parameters(n=(secdim+moddim)*ringdim, q=q, length_bound=B_MSIS, m=(moddim)*ringdim, norm=2, tag='Signature SIS')
+sis_param = SIS.Parameters(n=(secdim)*ringdim, q=q, length_bound=B_MSIS, m=(moddim+secdim+1)*ringdim, norm=2, tag='Signature SIS')
 
 print("----------")
 print("Start LWE estimation")
@@ -190,11 +194,11 @@ expansionfactor = 4
 adjust_factor = 0
 
 if secpar == 128:
-	adjust_factor = 0
+	adjust_factor = 17
 if secpar == 192:
-	adjust_factor = 9
+	adjust_factor = 21
 if secpar == 256:
-	adjust_factor = 9
+	adjust_factor = 25
 
 #secdimhat = secdim * expansionfactor
 #moddimhat = moddim * expansionfactor
@@ -353,7 +357,7 @@ if secpar == 192:
 if secpar == 256: 
 	LNP_ri=303
 
-pi_dsi = com_E + proof_dsi + LNP_dsi
+pi_dsi = com_E + pi_LIN_dsi + LNP_dsi
 print("Final round proof cost in KB: ", pi_dsi)
 
 print("Active signing cost =", f"{ComCost_Passive + pi_dsi + LNP_ri:.2f}", "KB") 
