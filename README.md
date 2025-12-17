@@ -110,7 +110,7 @@ More information about requirements to run is found inside the folder `olingo__l
 
 
 # Estimating Olingo Security
-The scripts used to estimate hardness with our selected parameters can be found in the folder `lattice-estimator`.
+The script used to estimate hardness with our selected parameters can be found in the folder `lattice-estimator`.
 They depend on the lattice-estimator [github.com/malb/lattice-estimator](https://github.com/malb/lattice-estimator).
 
 # A warning to developers:
