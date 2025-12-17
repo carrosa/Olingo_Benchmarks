@@ -1,3 +1,22 @@
+# Olingo
+Below follows a "guide" on how to compile and run Olingo lazer benchmarks.
+Below that is the complete lazer library original README.
+
+## Olingo lazer proof benchmarks:
+
+We use the python interface for Lazer for LNP style proofs.
+The folders for our benchmarks:
+
+* python/bnd_E_prf - norm bound proof of E with sigma_tdec (norm bound proof of pi_dsi)
+* python/dkg_prf1 - prove norm bound of S for dkg (norm bound proof for pi_{KGen_E}
+* python/pi_r - proving pi_r (sigma=2^38, otherwise same as pi_si)
+* python/pi_si - proving pi_si (sigma=2^20, otherwise same as pi_r)
+
+To build each of the benchmarks, run `make` in their respective folders. Otherwise build as per lazer instructions.
+
+More information about requirements to run is found inside the folder `olingo__lazer`, in the file `lazer_getting_started.html` and in the github repository for lazer: https://github.com/lazer-crypto/lazer.
+
+
 lazer
 =====
 A library for lattice-based zero-knowledge proofs.

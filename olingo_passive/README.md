@@ -1,5 +1,5 @@
 # Passive Olingo
-The code for the passively secure Olingo scheme is based on the Dilithium code base. The original README for Dilithium is below.
+The code for the passively secure Olingo scheme is based on the Dilithium code base.
 For the implementation we have used Dilithium's polynomials and ntt functions with GMP integers instead of the int64_t type in our implementation.
 
 Passive signing benchmarks can be generated with `make ghkss`, from `test_GHKSS256.c`.
