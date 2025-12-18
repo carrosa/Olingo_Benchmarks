@@ -228,8 +228,8 @@ log_q_enc = log(q_enc_actual,2)
 print("HE parameters: ", "( N =", ringdim, ", qhat bits=", N(log_q_enc,4), ", secdimhat =", secdimhat, ", moddimhat = ", moddimhat, ", m = ", m, ", secdim = ", secdim, ", moddim = ", moddim, ")")
 
 
-v_enc_lwe_param = LWE.Parameters(n=ceil(ringdim*m), q=q_enc_actual, Xs=ND.DiscreteGaussian(sigma_ctx), Xe=ND.DiscreteGaussian(sigma_ctx), tag='HE LWE v')
-u_enc_lwe_param = LWE.Parameters(n=ceil(ringdim*secdimhat), q=q_enc_actual, Xs=ND.DiscreteGaussian(sigma_ctx), Xe=ND.DiscreteGaussian(sigma_ctx), tag='HE LWE u')
+v_enc_lwe_param = LWE.Parameters(n=ceil(ringdim*m), q=q_enc_actual, Xs=ND.DiscreteGaussian(sigma_ctx), Xe=ND.DiscreteGaussian(sigma_ctx),m=2**60, tag='HE LWE v')
+u_enc_lwe_param = LWE.Parameters(n=ceil(ringdim*secdimhat), q=q_enc_actual, Xs=ND.DiscreteGaussian(sigma_ctx), Xe=ND.DiscreteGaussian(sigma_ctx),m=2**60, tag='HE LWE u')
 pk_enc_lwe_param = LWE.Parameters(n=ceil(ringdim*moddimhat), q=q_enc_actual, Xs=ND.DiscreteGaussian(sigma_B), Xe=ND.DiscreteGaussian(sigma_B), tag='HE LWE Public Key')
 
 print()
@@ -361,6 +361,8 @@ pi_dsi = com_E + pi_LIN_dsi + LNP_dsi
 print("Final round proof cost in KB: ", pi_dsi)
 
 print("Active signing cost =", f"{ComCost_Passive + pi_dsi + LNP_ri:.2f}", "KB") 
+print("Online signing cost =", f"{decshare_size_bits + pi_dsi :.2f}", "KB") 
+print("Online signing cost with LaBRADOR =", f"{decshare_size_bits + com_E + pi_LIN_dsi + 66 :.2f}", "KB") 
 print("Active signing cost using LaBRADOR =", f"{ComCost_Passive + 66 + LNP_ri:.2f}", "KB") 
 print("Optimistic signing cost =", f"{decshare_size_bits:.2f}", "KB")
 
