@@ -2,13 +2,19 @@ import os
 #os.chdir("/Users/phmbp2025/Desktop/lwe-estimator")
 
 from estimator import *
+from estimator.lwe_dual import dual_hybrid
 
-
-#security parameter
+# Security parameter
 
 secpar = 256
 
 print("Security level: ", secpar)
+
+# Choose priority for (1) small ver key (2) small sig or (3) 'balanced' i.e. small |pk+sig|
+
+balanced = 1
+small_pk = 0
+small_sig = 0 
 
 
 # threshold sizes
@@ -25,17 +31,16 @@ ringdim = 256
 moddim = 0
 secdim = 0
 
-if secpar == 128: 
-	moddim = 7
-	secdim = 10
-
-if secpar == 192: 
-	moddim = 10
-	secdim = 13
-
-if secpar == 256: 
-	moddim = 12
-	secdim = 16
+if balanced==1: 
+	if secpar == 128: 
+		moddim = 8
+		secdim = 8
+	if secpar == 192: 
+		moddim = 11
+		secdim = 11
+	if secpar == 256: 
+		moddim = 14
+		secdim = 14
 
 # Setting cut-off point for truncated gaussian sampling
 
@@ -55,30 +60,18 @@ while ((tail_bound_2**ringdim)*exp((ringdim/2)*(1-tail_bound_2^2))) > rej_rate:
 
 Q = 2**60
 
-# Bit-dropping parameters 
+# Setting initial gaussian width of w. Set approx 38 bits. 
 
-if secpar==128:
-	kappa_y = 38
-	kappa_w = 41
-if secpar==192:
-	kappa_y = 36
-	kappa_w = 40
-if secpar==256:
-	kappa_y = 35
-	kappa_w = 41
-
-# Gaussian widths for s and r, set according to Raccoon analysis
-
-
-if secpar==128:
-	sigma_r = 2**38
-	sigma_s = 2**20
-if secpar==192:
-	sigma_r = 2**38
-	sigma_s = 2**20
-if secpar==256:
-	sigma_r = 2**38
-	sigma_s = 2**20
+if balanced==1: 
+	if secpar==128:
+		sigma_w = 2**29
+		sigma_y=2**10
+	if secpar==192:
+		sigma_w = 2**30
+		sigma_y=2**10
+	if secpar==256:
+		sigma_w = 2**30
+		sigma_y=2**10 
 
 
 # Defining challenge space 1-norm
@@ -87,93 +80,119 @@ nu = 0
 while ((2**nu) * binomial(ringdim,nu) <2**secpar):
     nu = nu + 1
 
+# Bit-dropping parameters 
+
+if balanced == 1:
+	num = floor(log(nu,2).n()) # log2 of challspace 1-norm
+	kappa_y = floor(log(sigma_w * sqrt(t * (1+secdim/moddim))/2,2)) - num
+	print("kappa_y = ", kappa_y)
+	kappa_w = kappa_y + num - 1
+	print("kappa_w = ", kappa_w)
+	print("first term bits = ",log(nu*2**(kappa_y),2).n())
+	print("second term bits = ",log(2**(kappa_w+1),2).n())
+
+# Gaussian widths for s and r, set according to Raccoon analysis
+
+
+
+print("----------------------------------------------------------------------------------------------")
+
+print("Assert (Rounding Correctness): nu*2^(kappa_y)+2^(kappa_w+1) <= sigma_w * sqrt[t * (1+secdim/moddim)]")
+print("Assert LHS =", log(nu*2**kappa_y+2**(kappa_w+1),2).n())
+print("Assert RHS =", log(sigma_w * sqrt(t * (1+secdim/moddim)),2).n())
+print("Implies sigma_w can be min =", log((nu*2**kappa_y+2**(kappa_w+1))/(sqrt(t * (1+secdim/moddim))),2).n(), " bits")
+sigma_w = 2**(log((nu*2**kappa_y+2**(kappa_w+1))/(sqrt(t * (1+secdim/moddim))),2)+0.0000000000001)
+assert(nu*2**kappa_y+2**(kappa_w+1) <= sigma_w * sqrt(t * (1+secdim/moddim)))
+print("Optimised sigma_w = ", log(sigma_w,2).n(), " bits")
+
+
+print("----------------------------------------------------------------------------------------------")
+print("Assert: sigma_y <= sigma_w/nu")
+print("Assert LHS =", log(sigma_y,2).n())
+print("Assert RHY =", log(sigma_w/nu,2).n())
+assert(sigma_y <= sigma_w/nu)
 
 # Hint-MLWE bound
 
 B_HMLWE = Q * nu * (1+ringdim*(secpar+1+2 * log(ringdim,2))/sqrt(Q))
 
-assert(nu*2**kappa_y+2**(kappa_w+1) <= sigma_r * sqrt(t * (1+moddim/secdim)))
-
-assert(sigma_s <= sigma_r/nu)
-
-
 # Gaussian width for MLWE security
 
-sigma = sqrt(1/(2/(n*sigma_s**2) + 2*B_HMLWE/(t*sigma_r**2)))
+sigma = sqrt(1/(2/(n*sigma_y**2) + 2*B_HMLWE/(t*sigma_w**2)))
 
-B = e**(1/4) * (nu * sigma_s * n  + t * sigma_r)*sqrt(ringdim * (moddim + secdim)) + (nu * (2**kappa_y) + 2**(kappa_w+1)) * sqrt(ringdim * moddim)
+# 2-norm bound of signature z
+
+B = e**(1/4) * (n * nu * sigma_y  + t * sigma_w)*sqrt(ringdim * (moddim + secdim)) + (nu * (2**kappa_y) + 2**(kappa_w+1)) * sqrt(ringdim * moddim)
 
 #print("B_2z =", log(B,2).n())
 
+# bound for ST-MSIS security
+
 B_STMSIS = B + sqrt(nu) + (nu * (2**(kappa_y)) + 2**(kappa_w + 1)) * sqrt(ringdim * moddim)
+
 #print("B_STMSIS = ", log(B_STMSIS,2).n(), "bits")
 
 B_MSIS = B_STMSIS - nu #Following Raccoon parameter selection recommendation
 
-print("B_MSIS bits =", log(B_MSIS,2).n())
+#print("B_MSIS bits =", log(B_MSIS,2).n())
 
-B_inf =  sqrt(ringdim) * tail_bound * sigma_s * sqrt(n) + tail_bound * sigma_r * sqrt(t)
+B_inf =  sqrt(ringdim) * tail_bound * sigma_y * sqrt(n) + tail_bound * sigma_w * sqrt(t)
 
 # Setting signature Modulus
 
-if secpar == 128:
-	logq = 56
-
-if secpar == 192:
-	logq = 56
-
-if secpar == 256:
-	logq = 56
-
-
+print("----------------------------------------------------------------------------------------------")
+print("Assert (ensuring valid SIS instance): B_MSIS < (q-1)/2")
+print("LHS =", log(B_MSIS,2).n())
+print("Implies q can be:", log(2*B_MSIS+1,2).n(), " bits")
+logq=log(2*B_MSIS+1,2)
 q = round(2^logq)
 while  (q % (2*ringdim) != 1) or (gcd(q-1, 2*ringdim) == 1):   #setting for NTT friendliness
 	q = next_prime(q)
-
-print("Signature parameters: ", "( N =", ringdim, ", q bits=", round(log(q,2)), ", #sigs = 2^",log(Q,2), ", chalspace 1-norm =", nu, ", k_y =", kappa_y, ", k_w =", kappa_w, ", mod dim =", moddim, ", sec dim =", secdim, ", sigma_y =", log(sigma_s,2), ", sigma_w =", log(sigma_r,2), ")")
-
-# Security check
-
-#LWE for partial signing key
-y_lwe_param = LWE.Parameters(n=ringdim*moddim, q=q, Xs=ND.DiscreteGaussian(sigma_s), Xe=ND.DiscreteGaussian(sigma_s), tag='Partial Signature Key LWE')
-
-#LWE for partial commitment
-w_lwe_param = LWE.Parameters(n=ringdim*moddim, q=q, Xs=ND.DiscreteGaussian(sigma_r), Xe=ND.DiscreteGaussian(sigma_r), tag='Partial Commitment LWE')
-
-#LWE for combined signature 
-lwe_param = LWE.Parameters(n=ringdim*moddim, q=q, Xs=ND.DiscreteGaussian(sigma), Xe=ND.DiscreteGaussian(sigma), tag='Combined Signature LWE')
-print()
-
-#print(log(B_MSIS,2).n())
 assert(B_MSIS < (q-1)/2)
+print("q set at ", log(q,2).n(), " bits")
+print("----------------------------------------------------------------------------------------------")
 
-#SIS for security
-sis_param = SIS.Parameters(n=(secdim)*ringdim, q=q, length_bound=B_MSIS, m=(moddim+secdim+1)*ringdim, norm=2, tag='Signature SIS')
+
+print("Signature parameters: ", "( N =", ringdim, ", q bits=", round(log(q,2)), ", #sigs = 2^",log(Q,2), ", chalspace 1-norm =", nu, ", kappa_y =", kappa_y, ", kappa_w =", kappa_w, ", mod dim =", moddim, ", sec dim =", secdim, ", sigma_y =", log(sigma_y,2).n(), " bits",  ", sigma_w =", log(sigma_w,2).n(), " bits", ")")
+
 
 print("----------")
 print("Start LWE estimation")
 print("----------")
+
+#LWE for partial signing key
+y_lwe_param = LWE.Parameters(n=ringdim*secdim, q=q, Xs=ND.DiscreteGaussian(sigma_y), Xe=ND.DiscreteGaussian(sigma_y), m=ringdim*moddim, tag='Partial Signature Key LWE')
+
+#LWE for partial commitment
+w_lwe_param = LWE.Parameters(n=ringdim*secdim, q=q, Xs=ND.DiscreteGaussian(sigma_w), Xe=ND.DiscreteGaussian(sigma_w), m=ringdim*moddim, tag='Partial Commitment Key LWE')
+
+#LWE for verification key
+lwe_param = LWE.Parameters(n=ringdim*secdim, q=q, Xs=ND.DiscreteGaussian(sigma), Xe=ND.DiscreteGaussian(sigma), m=ringdim*moddim, tag='Combined Signature LWE')
 print()
 
 print("LWE Sec. of partial signing key")
 y_lwe = LWE.estimate.rough(y_lwe_param)
+
+
 print()
 print("LWE Sec. of partial commitment")
 w_lwe = LWE.estimate.rough(w_lwe_param)
+print(w_lwe)
+
 print()
 
-print("LWE Sec. of combined signature")
+print("LWE Sec. verification key")
 r_lwe = LWE.estimate.rough(lwe_param)
 print()
 
-print("Combined LWE for Hint LWE:")
-print(r_lwe)
-print()
 
 print("----------")
 print("Start SIS estimation")
 print("----------")
 print()
+
+#SIS for security
+sis_param = SIS.Parameters(n=(moddim)*ringdim, q=q, length_bound=B_MSIS, m=(moddim+secdim+1)*ringdim, norm=2, tag='Signature SIS')
 
 r_sis = SIS.estimate.rough(sis_param)
 
@@ -190,15 +209,15 @@ print()
 p = q
 
 # params for granular adjustment of security level
-expansionfactor = 4 
+expansionfactor = 4
 adjust_factor = 0
 
 if secpar == 128:
-	adjust_factor = 17
+	adjust_factor = 11
 if secpar == 192:
-	adjust_factor = 21
+	adjust_factor = 15
 if secpar == 256:
-	adjust_factor = 25
+	adjust_factor = 19
 
 #secdimhat = secdim * expansionfactor
 #moddimhat = moddim * expansionfactor
@@ -213,9 +232,13 @@ sigma_B = sqrt(2/3)
 
 B_2 = nu * n * moddimhat * tail_bound_2 * sigma_B * ringdim * tail_bound_2 * sigma_ctx + n * nu * p * tail_bound_2 * sigma_ctx*sqrt(ringdim) + p * nu * n * secdimhat * tail_bound_2 *sigma_B * ringdim * tail_bound_2 * sigma_ctx + t * tail_bound_2 * sigma_B * ringdim * tail_bound_2 * sigma_ctx * moddimhat + p * t * tail_bound_2 * sigma_ctx * sqrt(ringdim) + t * p * secdimhat * tail_bound_2 * sigma_B * ringdim *tail_bound_2 * sigma_ctx
 
-sigma_tdec = sqrt(Q * B_2**2 / p**2)
+print("B_2 bits = ", log(B_2,2).n())
+print("p bits =", log(p,2).n())
 
-B_dec = nu * n * tail_bound_2 * sigma_s * sqrt(ringdim * secdim) + t * tail_bound_2 * sigma_r * sqrt(ringdim * secdim) +B_2 + p * t * tail_bound_2 * sigma_tdec 
+sigma_tdec = sqrt(Q * B_2**2 / p**2)
+print("sigma_tdec = ", sigma_tdec.n(100))
+
+B_dec = nu * n * tail_bound_2 * sigma_y * sqrt(ringdim * secdim) + t * tail_bound_2 * sigma_w * sqrt(ringdim * secdim) + B_2 + p * t * tail_bound_2 * sigma_tdec 
 q_enc = ((B_dec) * 2).n()
 while  (q_enc % (2*ringdim) != 1) or (gcd(q_enc-1, 2*ringdim) == 1):
 	q_enc = next_prime(q_enc)
@@ -261,7 +284,7 @@ sig_com_rand = 0.667
 A1_height = 1
 A2_height = m
 A1_A2_width = A1_height+A2_height+1
-com_hiding_param = LWE.Parameters(n=ceil(ringdim*(A1_height+A2_height)), q=q_enc_actual, Xs=ND.DiscreteGaussian(sig_com_rand), Xe=ND.DiscreteGaussian(sig_com_rand), tag='com hiding')
+com_hiding_param = LWE.Parameters(n=ringdim*(A1_A2_width), q=q_enc_actual, Xs=ND.DiscreteGaussian(sig_com_rand), Xe=ND.DiscreteGaussian(sig_com_rand), m = A2_height+A1_height, tag='com hiding')
 com_hiding = LWE.estimate.rough(com_hiding_param)
 print(com_hiding)
 
@@ -269,11 +292,10 @@ print(com_hiding)
 print()
 print("Computing binding hardness:")
 B_com_rand = 16*sig_com_rand*sqrt(nu*ringdim)
-print(f"{B_com_rand=}")
+print("B_com_rand =", B_com_rand.n())
 sis_param = SIS.Parameters(n=(A1_height)*ringdim, q=q_enc_actual, length_bound=B_com_rand, m=ringdim*A1_A2_width, norm=2, tag='Signature SIS')
 com_sis = SIS.estimate.rough(sis_param)
 print(com_sis)
-
 
 
 print()
@@ -295,7 +317,7 @@ print("SIG size in KB:", N(signature/8000,digits=4))
 print("PK size in KB:", N(pk/8000,digits=4))
 print()
 
-##### DKG Passive sizing sizes #######
+##### DKG_E Passive sizing #######
 
 h_i = 256
 B_i = moddimhat * m * ringdim * log(q,2)
@@ -303,11 +325,62 @@ B_ij = moddimhat * m * ringdim * log(q,2)
 S_ij = secdimhat * m * ringdim * log(q,2)
 E_ij = moddimhat * m * ringdim * log(q,2)
 
-DKG_comcostbits = h_i + B_i + n*B_ij + n*S_ij + n*E_ij 
+DKG_E_passive_comcostbits = h_i + B_i + (n-1)*B_ij + (n-1)*S_ij + (n-1)*E_ij 
 
-DKG_comcost = (DKG_comcostbits/8000000).n()
+DKG_E_passive_comcost = (DKG_E_passive_comcostbits/8000000).n()
 
-print("DKG passive com cost=", DKG_comcost, "MB")
+print("DKG_E passive com cost=", DKG_E_passive_comcost, "MB")
+
+##### DKG_E Active sizing #######
+
+LNP_DKGE_S=0
+if secpar == 128: 
+	LNP_DKGE_S= 10771152
+if secpar == 192: 
+	LNP_DKGE_S= 17302699
+if secpar == 256: 
+	LNP_DKGE_S= 24970974
+
+pi_2_LIN_bits = m * (ringdim + (secdimhat + 2)*log(n*(2*0.675*(secdimhat+2)*ringdim*nu),2))
+
+pi_3_LIN_bits = m * (ringdim + (secdimhat + 2)*log(t*(2*0.675*(secdimhat+2)*ringdim*nu),2))
+
+pi_KeyGenE_bits = LNP_DKGE_S + pi_2_LIN_bits + pi_3_LIN_bits
+
+DKG_E_allproofs_bits = pi_KeyGenE_bits
+print("DKG_E proofs cost = ", (DKG_E_allproofs_bits/8000).n(), " KB")
+
+print("DKG_E active com cost = ", ((DKG_E_allproofs_bits+DKG_E_passive_comcostbits)/8000000).n(), " MB")
+
+##### DKG_S Passive sizing #######
+
+h_yi = 256
+yi= ringdim * secdim * log(q,2)
+ctx_si = ringdim*secdimhat*log(q_enc_actual,2) + ringdim*m*log(q_enc_actual)
+
+DKG_S_passive_comcostbits = DKG_E_passive_comcostbits + h_yi + yi + ctx_si
+DKG_S_passive_comcost = (DKG_S_passive_comcostbits/8000000).n()
+print("DKG_S passive com cost=", DKG_S_passive_comcost, "MB")
+
+##### DKG_S Active sizing #######
+
+LNP_skg_si=0
+if secpar == 128: 
+	LNP_skg_si= 1098331
+if secpar == 192: 
+	LNP_skg_si= 1238581 
+if secpar == 256: 
+	LNP_skg_si= 1495230
+
+pi_LIN_skg_si_bits = 4*ringdim + log(5*(2*0.675*(secdimhat+2)*ringdim*nu),2)
+
+print("DKG_S proofs excluding DKG_E proofs =", ((LNP_skg_si + pi_LIN_skg_si_bits)/8000).n(), " KB")
+
+DKG_S_allproofs_bits = pi_KeyGenE_bits + LNP_skg_si + pi_LIN_skg_si_bits
+print("DKG_S total proofs cost = ", (DKG_S_allproofs_bits/8000).n(), " KB")
+DKG_S_active_comcostbits = DKG_S_passive_comcostbits + DKG_S_allproofs_bits
+print("DKG_S total active cost = ", (DKG_S_active_comcostbits/8000000).n(), " MB")
+
 print()
 
 ##### Passive signing sizing sizes #######
@@ -342,24 +415,26 @@ pi_LIN_dsi = N((challenge + z_E + z_S)/8000,digits=4)
 
 # LNP proofs calculated externally using LaZer library
 
-LNP_dsi=0
-if secpar == 128: 
-	LNP_dsi=89
-if secpar == 192: 
-	LNP_dsi=105.22
-if secpar == 256: 
-	LNP_dsi=120.22
 
 LNP_ri=0
 if secpar == 128: 
-	LNP_ri=193
+	LNP_ri= 123.18
 if secpar == 192: 
-	LNP_ri=250.75
+	LNP_ri= 160.67 
 if secpar == 256: 
-	LNP_ri=303
+	LNP_ri= 194.02 
+
+
+LNP_dsi=0
+if secpar == 128: 
+	LNP_dsi=185.68
+if secpar == 192: 
+	LNP_dsi=238.64
+if secpar == 256: 
+	LNP_dsi=288.04 
 
 pi_dsi = com_E + pi_LIN_dsi + LNP_dsi
-print("Final round proof cost in KB: ", pi_dsi)
+print("Final round proof cost =: ", pi_dsi, " KB")
 
 print("Active signing cost =", f"{ComCost_Passive + pi_dsi + LNP_ri:.2f}", "KB") 
 print("Online signing cost =", f"{decshare_size_bits + pi_dsi :.2f}", "KB") 
