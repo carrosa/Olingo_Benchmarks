@@ -16,51 +16,20 @@ using namespace std;
 #ifndef COMMON_H
 #define COMMON_H
 
-/* Parameter v in the commitment  scheme (laximum l1-norm of challs). */
-#define NONZERO     36
-/* Security level to attain. */
-#define LEVEL       128
-/* The \infty-norm bound of certain elements. */
-#define BETA        1
+#define NONZERO     23
 /* Width k of the comming matrix. */
-#define WIDTH        25
 /* Height of the commitment matrix. */
 #define HEIGHT        1
 /* Dimension of the committed messages. */
 #ifndef SIZE
-#define SIZE        22
+#define SIZE        21
 #endif
-/* Large modulus. */
-#define PRIMEQ      "302231454903657293688833"
-/* Small modulus. */
-#define PRIMEP      2
+#define WIDTH        SIZE + HEIGHT + 1
 /* Degree of the irreducible polynomial. */
-#define DEGREE      256 //2048
-/* Sigma for the commitment gaussian distribution. */
-#define SIGMA_C     16526//(1u << 12)
-/* Sigma for the boundness proof. */
-#define SIGMA_B1     (11585u)
-/* Sigma for the boundness proof. */
-#define SIGMA_B2     (1e66l)
-/* Norm bound for boundness proof. */
-#define BOUND_B     "6678434726570384949248"
-/* Parties that run the distributed decryption protocol. */
-#define PARTIES     4
-/* Security level for Distributed Decryption. */
-#define BGVSEC      40
-/* Bound for Distributed Decryption = 2^BGVSEC * q/(2 * p * PARTIES). */
-#define BOUND_D     "750837175903336127688539820910095018"
+#define DEGREE      256
+#define SIGMA_C 2 << 15
 
-/*
- * NTRU DEFINEs
- * */
-#define NTRU_PRIMEQ 576460752303439873
-#define NTRU_PRIMEP 2
-#define NTRU_SIGMA 13
-#define NTRU_DEGREE 2048
-#define NTRU_BOUND_B "1"
-
-#define SIGMAE 1208
+#define SIGMAE 123298420299561632
 
 
 namespace params {
@@ -70,10 +39,6 @@ namespace params {
     using poly_big = nfl::poly_from_modulus<uint64_t, 4 * DEGREE, 124>;
 }
 
-namespace ntru_params {
-    using poly_p = nfl::poly_from_modulus<uint32_t, NTRU_DEGREE, 30>;
-    using poly_q = nfl::poly_from_modulus<uint64_t, NTRU_DEGREE, 62>;
-}
 
 /*============================================================================*/
 /* Type definitions                                                           */
@@ -113,7 +78,7 @@ void bdlop_sample_rand(vector<params::poly_q> &r);
 
 void bdlop_sample_chal(params::poly_q &f);
 
-bool bdlop_test_norm(params::poly_q r, uint64_t sigma_sqr);
+bool bdlop_test_norm(params::poly_q r, double sigma_sqr);
 
 void bdlop_commit(commit_t &com, vector<params::poly_q> m, comkey_t &key, vector<params::poly_q> r);
 

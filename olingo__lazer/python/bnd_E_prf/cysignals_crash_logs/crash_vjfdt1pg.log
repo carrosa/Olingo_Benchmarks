@@ -1,0 +1,828 @@
+GNU gdb (Ubuntu 15.0.50.20240403-0ubuntu1) 15.0.50.20240403-git
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Enable debuginfod for this session? (y or [n]) [answered N; input not from terminal]
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+(No debugging symbols found in /home/carosa/Olingo_Benchmarks/olingo__lazer/python/bnd_E_prf/../_lazer_cffi.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/bin/../lib/./libgmp.so.10)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/_cffi_backend.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/../../libffi.so.8)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/lib-dynload/../../libcrypto.so.3)
+(No debugging symbols found in /home/carosa/Olingo_Benchmarks/olingo__lazer/python/bnd_E_prf/_ctxr_params_cffi.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cysignals/signals.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/sage_object.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/persist.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/lazy_import.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/lib-dynload/../../libz.so.1)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/lib-dynload/../../liblzma.so.5)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/instancedoc.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/lazy_attribute.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/inherit_comparison.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/nested_class.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/classcall_metaclass.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/category_object.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/cpython/getattr.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/categories/category_cy_helper.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/c3_controlled.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/cachefunc.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/function_mangling.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/weak_dict.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/cpython/dict_del_by_value.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/fast_methods.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/constant_function.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/richcmp.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/cpython/builtin_types.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/coerce_dict.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/parent.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/categories/map.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/sets/pythonclass.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/categories/category_singleton.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/categories/functor.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/categories/morphism.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/arith/power.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/debug_options.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/lazy_string.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/coerce.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/gmpy2/gmpy2.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/gmpy2/../../../libmpc.so.3)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/categories/action.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/coerce_maps.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/cpython/type.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/parent_gens.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/parent_base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/parent_old.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/mutability.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/element_wrapper.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/misc_c.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/cpython/debug.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/cpython/string.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/sage_timeit_class.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/session.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/lib-dynload/../../libssl.so.3)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/fpickle.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/reset.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/randstate.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/gmp/pylong.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/error.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/../../../../.././libgf2x.so.3)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_ZZ.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/integer.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/rational.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/fast_arith.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/number_field/number_field_base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/ring.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/categories/coercion_methods.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/real_double.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/abc.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/allocator.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cypari2/pari_instance.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cypari2/gen.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cypari2/stack.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cypari2/string_utils.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cypari2/convert.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cypari2/closure.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cypari2/handle_error.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cypari2/custom_block.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/arith/rational_reconstruction.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/integer_ring.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/number_field/number_field_element_base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/convert.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_ZZ_pContext.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_ZZ_p.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_ZZX.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_ZZ_pX.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_ZZ_pEContext.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_ZZ_pE.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_ZZ_pEX.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_lzz_pContext.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_lzz_p.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/finite_rings/element_base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/finite_rings/integer_mod.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/ext/memory.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/arith/functions.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_lzz_pX.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_mat_ZZ.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_GF2.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_GF2X.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_GF2EContext.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_GF2E.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_GF2EX.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_mat_GF2E.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/ntl/ntl_mat_GF2.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/symmetrica/symmetrica.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/symmetrica/../../../../../libsymmetrica.so.3)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/data_structures/bitset.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/memory_allocator/memory_allocator.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/data_structures/bitset_base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/factory.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/polynomial_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/commutative_polynomial.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/binary_tree.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/polynomial_compiled.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/multi_polynomial.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/polydict.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/derivative.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/pow_computer.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_capped_relative_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_generic_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/local_generic_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/arith/srange.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/morphism.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/common_conversion.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/pari/convert_gmp.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/finite_rings/finite_field_base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_capped_absolute_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_fixed_mod_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_floating_point_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/fraction_field_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/real_double_element_gsl.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/../../../../libgsl.so.25)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/function_field/element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/function_field/element_rational.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/power_series_ring_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/multi_polynomial_ring_base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/finite_rings/element_givaro.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/finite_rings/../../../../../libgivaro.so.9)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/finite_rings/../../../../.././libgmpxx.so.4)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/finite_rings/element_pari_ffelt.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/complex_mpfr.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/real_mpfr.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/mpmath/utils.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/pari/convert_sage_real_mpfr.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/complex_double.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/complex_conversion.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/pari/convert_sage_complex_double.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/parser.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/real_lazy.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/number_field/number_field_morphisms.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/coerce_actions.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modules/free_module_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modules/module.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/groups/group.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/constructor.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/args.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/complex_interval.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/real_mpfi.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/convert/mpfi.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/number_field/number_field_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/evaluation_ntl.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/number_field/number_field_element_quadratic.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/real_arb.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/complex_arb.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/polynomial_complex_arb.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/finite_rings/residue_field.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_printing.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_ZZ_pX_FM_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_ZZ_pX_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_ext_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/pow_computer_ext.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_ZZ_pX_CR_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/padic_ZZ_pX_CA_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/qadic_flint_CR.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/pow_computer_flint.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/polynomial_integer_dense_flint.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/flint/fmpz_poly_sage.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/evaluation_flint.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/qadic_flint_CA.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/qadic_flint_FM.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/qadic_flint_FP.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/relative_ramified_FM.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/pow_computer_relative.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/relative_ramified_FP.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/relative_ramified_CA.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/padics/relative_ramified_CR.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/sets/family.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/semirings/tropical_semiring.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/laurent_polynomial.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/structure/list_clone.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/cyclotomic.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/polynomial_rational_flint.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/flint/fmpq_poly_sage.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/power_series_mpoly.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/power_series_poly.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/laurent_series_ring_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/multi_polynomial_libsingular.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/../../../../../libSingular-4.4.1.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/../../../../../libpolys-4.4.1.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/../../../../../libfactory-4.4.1.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/../../../../.././libsingular_resources-4.4.1.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/../../../../.././libreadline.so.8)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/../../../../.././libtinfow.so.6)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/../../../../../././libtinfo.so.6)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/singular/function.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/plural.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/finite_rings/element_ntl_gf2e.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/singular/ring.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/singular/singular.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/bin/../lib/singular/MOD/singmathic.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/singular/polynomial.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/noncommutative_ideals.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/multi_polynomial_ideal_libsingular.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/singular/option.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/bin/../lib/singular/MOD/p_Procs_FieldIndep.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/complex_mpc.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/tate_algebra_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/puiseux_series_ring_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/bernoulli_mod_p.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/bernmm.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/symbolic/ring.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/symbolic/expression.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/symbolic/function.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/combinat_cython.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/monoids/free_abelian_monoid_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/quadratic_forms/quadratic_form__evaluate.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/quadratic_forms/count_local_2.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/algebras/quatalg/quaternion_algebra_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/algebras/quatalg/quaternion_algebra_cython.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/matrix0.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/matrix1.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/matrix2.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/matrix_dense.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/matrix_integer_dense.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modules/vector_integer_dense.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/arith/multi_modular.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/matrix_modn_dense_float.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../../libfflas.so.1)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../../libffpack.so.1)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modules/vector_modn_dense.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/matrix_modn_dense_double.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/matrix_mod2_dense.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../../libgd.so.3)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../.././libpng16.so.16)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../.././libfreetype.so.6)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../.././libjpeg.so.8)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../.././libtiff.so.6)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../.././libwebp.so.7)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../../././libexpat.so.1)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../../././libzstd.so.1)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../../././libLerc.so.4)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../../././libdeflate.so.0)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/../../../../././libsharpyuv.so.0)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modules/vector_mod2_dense.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/pari/convert_flint.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/linbox/linbox_flint_interface.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/pari/convert_sage_matrix.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/pari/convert_sage.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/matrix/matrix_rational_dense.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modules/vector_rational_dense.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modular/modsym/p1list.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/search.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/words/word_char.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/words/word_datatypes.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modules/with_basis/indexed_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/data_structures/blas_dict.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/lazy_list.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/misc/callable_dict.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/algebras/finite_dimensional_algebras/finite_dimensional_algebra_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/algebras/clifford_algebra_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modular/arithgroup/arithgroup_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/groups/matrix_gps/group_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/groups/matrix_gps/group_element_gap.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/groups/libgap_wrapper.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/gap/element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/gap/util.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/groups/perm_gps/permgroup_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/gap/libgap.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/sets/recursively_enumerated_set.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/integer_lists/base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/integer_lists/invlex.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/permutation_cython.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modular/arithgroup/congroup.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/modular/arithgroup/farey_symbol.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/ore_polynomial_element.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/factorint.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/generic_graph_pyx.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/base/graph_backends.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/base/c_graph.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/data_structures/pairing_heap.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/base/dense_graph.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/base/static_sparse_backend.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/base/static_sparse_graph.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/views.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/distances_all_pairs.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/base/boost_graph.cpython-312-x86_64-linux-gnu.so)
+To enable execution of this file add
+	add-auto-load-safe-path /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/base/boost_graph.cpython-312-x86_64-linux-gnu.so
+line to your configuration file "/home/carosa/.config/gdb/gdbinit".
+To completely disable this security protection add
+	set auto-load safe-path /
+line to your configuration file "/home/carosa/.config/gdb/gdbinit".
+For more information about this security protection see the
+"Auto-loading safe path" section in the GDB manual.  E.g., run from the shell:
+	info "(gdb)Auto-loading safe path"
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/line_graph.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/connectivity.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/sets/disjoint_set.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/groups/perm_gps/partn_ref/data_structures.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/base/static_dense_graph.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/path_enumeration.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/traversals.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_decompositions/slice_decomposition.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/independent_sets.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/weakly_chordal.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/asteroidal_triples.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_decompositions/tree_decomposition.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_decompositions/vertex_separation.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_decompositions/fast_digraph.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_decompositions/clique_separators.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_decompositions/bandwidth.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_decompositions/cutwidth.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/cliquer.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/spanning_tree.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_decompositions/graph_products.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/comparability.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/isoperimetric_inequalities.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_coloring.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/hyperbolicity.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/chrompoly.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/graph_decompositions/rankwidth.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/matchpoly.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/convexity_properties.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/numerical/backends/generic_backend.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/lib-dynload/../../libsqlite3.so.0)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/sets/finite_set_map_cy.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/probability/probability_distribution.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/functions/prime_pi.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/calculus/integration.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/ext/fast_callable.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/ext/interpreters/wrapper_rdf.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/calculus/interpolation.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/calculus/ode.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/calculus/var.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/crypto/sbox.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/crypto/boolean_function.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/pbori/pbori.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/pbori/../../../../../../libbrial.so.3)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/rings/polynomial/pbori/../../../../../../libbrial_groebner.so.3)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/ext/fast_eval.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/plot/plot3d/base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/plot/plot3d/transform.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/plot/plot3d/index_face_set.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/plot/plot3d/shapes.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/plot/plot3d/parametric_surface.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/expnums.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/debruijn_sequence.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/partitions.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/flint/arith_sage.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/set_partition_iterator.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/posets/hasse_cython.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/combinat/enumeration_mod_permgroup.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/geometry/abc.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/geometry/triangulation/base.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cysignals/alarm.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/interfaces/process.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cysignals/pselect.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cysignals/pysignals.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/dynamics/arithmetic_dynamics/projective_ds_helper.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/quadratic_forms/ternary.cpython-312-x86_64-linux-gnu.so)
+(No debugging symbols found in /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/libs/../../../.././libgc.so.1)
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+0x0000120967310813 in __GI___wait4 (pid=165735, stat_loc=0x0, options=0, 
+    usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+
+Stack backtrace
+---------------
+    usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+        sc_ret = -512
+        sc_cancel_oldtype = 0
+        sc_ret = <optimized out>
+#1  0x00001209668a3813 in sigdie ()
+   from /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cysignals/signals.cpython-312-x86_64-linux-gnu.so
+No symbol table info available.
+#2  0x00001209668a6507 in cysigs_signal_handler ()
+   from /home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/cysignals/signals.cpython-312-x86_64-linux-gnu.so
+No symbol table info available.
+#3  <signal handler called>
+No locals.
+#4  0x0000120966a0525f in intvec_set (a=0x0, r=0x5a28e4779240)
+    at ./lazer.h:2978
+        zerobytes__ = <optimized out>
+        zero = <optimized out>
+        i = <optimized out>
+        ai = <optimized out>
+        zerobytes__ = <optimized out>
+        zero = <optimized out>
+        i = <optimized out>
+        ai = <optimized out>
+#5  poly_set_coeffvec (v=0x0, r=0x5a28e481d110) at ./lazer.h:3614
+No locals.
+#6  poly_set (a=<optimized out>, r=0x5a28e481d110) at src/poly.c:53
+        ring = <optimized out>
+        acoeffs = 0x0
+        ring = <optimized out>
+        acoeffs = <optimized out>
+#7  poly_set (r=0x5a28e481d110, a=0x1207da30cfb0) at src/poly.c:34
+        ring = 0x0
+        acoeffs = <optimized out>
+#8  0x0000120966a125f8 in polyvec_set_elem (elem=<optimized out>, idx=58, 
+    a=<synthetic pointer>) at ./lazer.h:3711
+        ptr = <optimized out>
+        ptr = <optimized out>
+#9  polyvec_set (a=<synthetic pointer>, r=<synthetic pointer>)
+    at ./lazer.h:3738
+        i = 58
+        ai = <optimized out>
+#10 _lin_set_statement_A (state=state@entry=0x5a28de8fbb28, A=<optimized out>)
+    at src/lin-proofs.c:4634
+        params = <optimized out>
+        Rprime = <optimized out>
+        tbox_params = <optimized out>
+        l = 0
+        nrows = <optimized out>
+        Ds_ = {{ring = 0x5a28de83c0f0, cpr = 150, elems = 0x5a28e47c6f40, 
+            ncols = 150, stride_col = 1, nrows = 59, stride_row = 1, 
+            mem = 0x5a28df103870, flags = 0}}
+        Dm_ = {{ring = 0x120966af7ba0 <_cffi_globals+1920>, cpr = 1723107072, 
+            elems = 0x120966b61430, ncols = 59, stride_col = 0, 
+            nrows = 2123649849, stride_row = 2698481495, 
+            mem = 0xb9286a4921600b00, flags = 3098038256}}
+        src = <optimized out>
+        dst = <optimized out>
+        i = 118
+#11 0x0000120966a12880 in lin_prover_set_statement_A (
+    state=state@entry=0x5a28de8fb800, A=<optimized out>)
+    at src/lin-proofs.c:4705
+No locals.
+#12 0x0000120966a12a25 in lin_prover_set_statement (state=0x5a28de8fb800, 
+    A=<optimized out>, t=0x5a28de884060) at src/lin-proofs.c:4720
+No locals.
+#13 0x0000120966ac4a13 in _cffi_f_lin_prover_set_statement ()
+   from /home/carosa/Olingo_Benchmarks/olingo__lazer/python/bnd_E_prf/../_lazer_cffi.cpython-312-x86_64-linux-gnu.so
+No symbol table info available.
+#14 0x00005a28b866e0a9 in cfunction_call (func=0x120808b4b650, 
+    args=<optimized out>, kwargs=<optimized out>)
+    at /usr/local/src/conda/python-3.12.12/Objects/methodobject.c:548
+        tstate = 0x5a28b8ae2910 <_PyRuntime+458992>
+        flags = <optimized out>
+        meth = <optimized out>
+        self = <optimized out>
+        result = <optimized out>
+#15 0x00005a28b8644f1c in _PyObject_MakeTpCall (
+    tstate=0x5a28b8ae2910 <_PyRuntime+458992>, callable=0x120808b4b650, 
+    args=<optimized out>, nargs=<optimized out>, keywords=<optimized out>)
+    at /usr/local/src/conda/python-3.12.12/Objects/call.c:240
+        call = 0x5a28b866e050 <cfunction_call>
+        argstuple = <optimized out>
+        kwdict = <optimized out>
+        result = 0x0
+#16 0x00005a28b864f241 in _PyEval_EvalFrameDefault (tstate=<optimized out>, 
+    frame=<optimized out>, throwflag=<optimized out>)
+    at Python/bytecodes.c:2715
+        callable = 0x120808b4b650
+        is_meth = <optimized out>
+        total_args = 3
+        args = <optimized out>
+        method = <optimized out>
+        res = <optimized out>
+        cache = 0x1209674de624
+        positional_args = <optimized out>
+        opcode = 171 '\253'
+        oparg = <optimized out>
+        cframe = {current_frame = 0x120967619230, 
+          previous = 0x5a28b8ae2a20 <_PyRuntime+459264>}
+        entry_frame = {f_code = 0x120967426590, previous = 0x0, 
+          f_funcobj = 0x0, 
+          f_globals = 0x5a28b864dc7c <_PyEvalFramePushAndInit+204>, 
+          f_builtins = 0x5a28b8ae2910 <_PyRuntime+458992>, 
+          f_locals = 0x5a28b87a2568, frame_obj = 0x120967509680, 
+          prev_instr = 0x120967426650, stacktop = 0, return_offset = 0, 
+          owner = 3 '\003', localsplus = {0x5a28b8ae2910 <_PyRuntime+458992>}}
+        kwnames = 0x0
+        prev_cframe = <optimized out>
+        next_instr = 0x1209674de624
+        stack_pointer = <optimized out>
+        exception_unwind = <optimized out>
+        dying = <optimized out>
+        __func__ = "_PyEval_EvalFrameDefault"
+        opcode_targets = {0x5a28b8567dd3 <_PyEval_EvalFrameDefault-944717>, 
+          0x5a28b864f68d <_PyEval_EvalFrameDefault+3693>, 
+          0x5a28b864f150 <_PyEval_EvalFrameDefault+2352>, 
+          0x5a28b864f8e3 <_PyEval_EvalFrameDefault+4291>, 
+          0x5a28b86546d3 <_PyEval_EvalFrameDefault+24243>, 
+          0x5a28b86548c5 <_PyEval_EvalFrameDefault+24741>, 
+          0x5a28b8652d69 <_PyEval_EvalFrameDefault+17737>, 
+          0x5a28b8650758 <_PyEval_EvalFrameDefault+7992>, 
+          0x5a28b8652236 <_PyEval_EvalFrameDefault+14870>, 
+          0x5a28b865137b <_PyEval_EvalFrameDefault+11099>, 
+          0x5a28b865473b <_PyEval_EvalFrameDefault+24347>, 
+          0x5a28b86531c0 <_PyEval_EvalFrameDefault+18848>, 
+          0x5a28b8654920 <_PyEval_EvalFrameDefault+24832>, 
+          0x5a28b864fd6c <_PyEval_EvalFrameDefault+5452>, 
+          0x5a28b8651570 <_PyEval_EvalFrameDefault+11600>, 
+          0x5a28b86540df <_PyEval_EvalFrameDefault+22719>, 
+          0x5a28b8651d70 <_PyEval_EvalFrameDefault+13648>, 
+          0x5a28b85678b0 <_PyEval_EvalFrameDefault-946032>, 
+          0x5a28b8650cf2 <_PyEval_EvalFrameDefault+9426>, 
+          0x5a28b8651e26 <_PyEval_EvalFrameDefault+13830>, 
+          0x5a28b8654f6a <_PyEval_EvalFrameDefault+26442>, 
+          0x5a28b8650aa3 <_PyEval_EvalFrameDefault+8835>, 
+          0x5a28b8652b8b <_PyEval_EvalFrameDefault+17259>, 
+          0x5a28b864fa10 <_PyEval_EvalFrameDefault+4592>, 
+          0x5a28b8650d8b <_PyEval_EvalFrameDefault+9579>, 
+          0x5a28b864fe8b <_PyEval_EvalFrameDefault+5739>, 
+          0x5a28b8652a33 <_PyEval_EvalFrameDefault+16915>, 
+          0x5a28b86547ed <_PyEval_EvalFrameDefault+24525>, 
+          0x5a28b86511b6 <_PyEval_EvalFrameDefault+10646>, 
+          0x5a28b865178b <_PyEval_EvalFrameDefault+12139>, 
+          0x5a28b865431b <_PyEval_EvalFrameDefault+23291>, 
+          0x5a28b8654b76 <_PyEval_EvalFrameDefault+25430>, 
+          0x5a28b8654b26 <_PyEval_EvalFrameDefault+25350>, 
+          0x5a28b8654acf <_PyEval_EvalFrameDefault+25263>, 
+          0x5a28b8651fee <_PyEval_EvalFrameDefault+14286>, 
+          0x5a28b8652f60 <_PyEval_EvalFrameDefault+18240>, 
+          0x5a28b8653e74 <_PyEval_EvalFrameDefault+22100>, 
+          0x5a28b85668aa <_PyEval_EvalFrameDefault-950134>, 
+          0x5a28b8651a6e <_PyEval_EvalFrameDefault+12878>, 
+          0x5a28b864ffea <_PyEval_EvalFrameDefault+6090>, 
+          0x5a28b864f6ef <_PyEval_EvalFrameDefault+3791>, 
+          0x5a28b86503cf <_PyEval_EvalFrameDefault+7087>, 
+          0x5a28b8651095 <_PyEval_EvalFrameDefault+10357>, 
+          0x5a28b8652525 <_PyEval_EvalFrameDefault+15621>, 
+          0x5a28b86504e3 <_PyEval_EvalFrameDefault+7363>, 
+          0x5a28b8651654 <_PyEval_EvalFrameDefault+11828>, 
+          0x5a28b86523d3 <_PyEval_EvalFrameDefault+15283>, 
+          0x5a28b8653226 <_PyEval_EvalFrameDefault+18950>, 
+          0x5a28b86549da <_PyEval_EvalFrameDefault+25018>, 
+          0x5a28b865403d <_PyEval_EvalFrameDefault+22557>, 
+          0x5a28b8567ab9 <_PyEval_EvalFrameDefault-945511>, 
+          0x5a28b85679fb <_PyEval_EvalFrameDefault-945701>, 
+          0x5a28b8565e41 <_PyEval_EvalFrameDefault-952799>, 
+          0x5a28b8652fbc <_PyEval_EvalFrameDefault+18332>, 
+          0x5a28b85666d0 <_PyEval_EvalFrameDefault-950608>, 
+          0x5a28b8653f02 <_PyEval_EvalFrameDefault+22242>, 
+          0x5a28b865031e <_PyEval_EvalFrameDefault+6910>, 
+          0x5a28b86522e1 <_PyEval_EvalFrameDefault+15041>, 
+          0x5a28b864f452 <_PyEval_EvalFrameDefault+3122>, 
+          0x5a28b8651455 <_PyEval_EvalFrameDefault+11317>, 
+          0x5a28b8652cbe <_PyEval_EvalFrameDefault+17566>, 
+          0x5a28b8655398 <_PyEval_EvalFrameDefault+27512>, 
+          0x5a28b865083c <_PyEval_EvalFrameDefault+8220>, 
+          0x5a28b8651ef6 <_PyEval_EvalFrameDefault+14038>, 
+          0x5a28b86506d3 <_PyEval_EvalFrameDefault+7859>, 
+          0x5a28b865310e <_PyEval_EvalFrameDefault+18670>, 
+          0x5a28b86557a9 <_PyEval_EvalFrameDefault+28553>, 
+          0x5a28b8653740 <_PyEval_EvalFrameDefault+20256>, 
+          0x5a28b8651257 <_PyEval_EvalFrameDefault+10807>, 
+          0x5a28b8653fe6 <_PyEval_EvalFrameDefault+22470>, 
+          0x5a28b8653ddd <_PyEval_EvalFrameDefault+21949>, 
+          0x5a28b8653f78 <_PyEval_EvalFrameDefault+22360>, 
+          0x5a28b856504c <_PyEval_EvalFrameDefault-956372>, 
+          0x5a28b864f5e5 <_PyEval_EvalFrameDefault+3525>, 
+          0x5a28b85683ec <_PyEval_EvalFrameDefault-943156>, 
+          0x5a28b8653303 <_PyEval_EvalFrameDefault+19171>, 
+          0x5a28b8650fd9 <_PyEval_EvalFrameDefault+10169>, 
+          0x5a28b8653c85 <_PyEval_EvalFrameDefault+21605>, 
+          0x5a28b86501da <_PyEval_EvalFrameDefault+6586>, 
+          0x5a28b86526fc <_PyEval_EvalFrameDefault+16092>, 
+          0x5a28b86519b4 <_PyEval_EvalFrameDefault+12692>, 
+          0x5a28b864f86a <_PyEval_EvalFrameDefault+4170>, 
+          0x5a28b864fdfa <_PyEval_EvalFrameDefault+5594>, 
+          0x5a28b864f6cb <_PyEval_EvalFrameDefault+3755>, 
+          0x5a28b8650170 <_PyEval_EvalFrameDefault+6480>, 
+          0x5a28b865457f <_PyEval_EvalFrameDefault+23903>, 
+          0x5a28b864f928 <_PyEval_EvalFrameDefault+4360>, 
+          0x5a28b8654db5 <_PyEval_EvalFrameDefault+26005>, 
+          0x5a28b864eeeb <_PyEval_EvalFrameDefault+1739>, 
+          0x5a28b8653abb <_PyEval_EvalFrameDefault+21147>, 
+          0x5a28b8653b1d <_PyEval_EvalFrameDefault+21245>, 
+          0x5a28b8655d84 <_PyEval_EvalFrameDefault+30052>, 
+          0x5a28b8655295 <_PyEval_EvalFrameDefault+27253>, 
+          0x5a28b864f994 <_PyEval_EvalFrameDefault+4468>, 
+          0x5a28b8655b3e <_PyEval_EvalFrameDefault+29470>, 
+          0x5a28b8652ae3 <_PyEval_EvalFrameDefault+17091>, 
+          0x5a28b865367d <_PyEval_EvalFrameDefault+20061>, 
+          0x5a28b8654dfc <_PyEval_EvalFrameDefault+26076>, 
+          0x5a28b8564cf9 <_PyEval_EvalFrameDefault-957223>, 
+          0x5a28b8650b50 <_PyEval_EvalFrameDefault+9008>, 
+          0x5a28b864f070 <_PyEval_EvalFrameDefault+2128>, 
+          0x5a28b8655cb7 <_PyEval_EvalFrameDefault+29847>, 
+          0x5a28b86513e2 <_PyEval_EvalFrameDefault+11202>, 
+          0x5a28b8651f70 <_PyEval_EvalFrameDefault+14160>, 
+          0x5a28b8654647 <_PyEval_EvalFrameDefault+24103>, 
+          0x5a28b8651c31 <_PyEval_EvalFrameDefault+13329>, 
+          0x5a28b864fc10 <_PyEval_EvalFrameDefault+5104>, 
+          0x5a28b8650c34 <_PyEval_EvalFrameDefault+9236>, 
+          0x5a28b8655a37 <_PyEval_EvalFrameDefault+29207>, 
+          0x5a28b865540f <_PyEval_EvalFrameDefault+27631>, 
+          0x5a28b8651987 <_PyEval_EvalFrameDefault+12647>, 
+          0x5a28b864ef50 <_PyEval_EvalFrameDefault+1840>, 
+          0x5a28b864f32f <_PyEval_EvalFrameDefault+2831>, 
+          0x5a28b8650b92 <_PyEval_EvalFrameDefault+9074>, 
+          0x5a28b864f01d <_PyEval_EvalFrameDefault+2045>, 
+          0x5a28b864f0ba <_PyEval_EvalFrameDefault+2202>, 
+          0x5a28b865552a <_PyEval_EvalFrameDefault+27914>, 
+          0x5a28b86509ef <_PyEval_EvalFrameDefault+8655>, 
+          0x5a28b86512bd <_PyEval_EvalFrameDefault+10909>, 
+          0x5a28b8655478 <_PyEval_EvalFrameDefault+27736>, 
+          0x5a28b865095f <_PyEval_EvalFrameDefault+8511>, 
+          0x5a28b864f533 <_PyEval_EvalFrameDefault+3347>, 
+          0x5a28b864fcc7 <_PyEval_EvalFrameDefault+5287>, 
+          0x5a28b86527fc <_PyEval_EvalFrameDefault+16348>, 
+          0x5a28b864ee30 <_PyEval_EvalFrameDefault+1552>, 
+          0x5a28b864f3db <_PyEval_EvalFrameDefault+3003>, 
+          0x5a28b8655242 <_PyEval_EvalFrameDefault+27170>, 
+          0x5a28b865498f <_PyEval_EvalFrameDefault+24943>, 
+          0x5a28b8650a60 <_PyEval_EvalFrameDefault+8768>, 
+          0x5a28b86509a5 <_PyEval_EvalFrameDefault+8581>, 
+          0x5a28b8654e75 <_PyEval_EvalFrameDefault+26197>, 
+          0x5a28b8654381 <_PyEval_EvalFrameDefault+23393>, 
+          0x5a28b86533dc <_PyEval_EvalFrameDefault+19388>, 
+          0x5a28b865505d <_PyEval_EvalFrameDefault+26685>, 
+          0x5a28b864ea4d <_PyEval_EvalFrameDefault+557>, 
+          0x5a28b8653828 <_PyEval_EvalFrameDefault+20488>, 
+          0x5a28b8653bb0 <_PyEval_EvalFrameDefault+21392>, 
+          0x5a28b864fbbf <_PyEval_EvalFrameDefault+5023>, 
+          0x5a28b86536f4 <_PyEval_EvalFrameDefault+20180>, 
+          0x5a28b8564dbd <_PyEval_EvalFrameDefault-957027>, 
+          0x5a28b864f10d <_PyEval_EvalFrameDefault+2285>, 
+          0x5a28b86558aa <_PyEval_EvalFrameDefault+28810>, 
+          0x5a28b8653527 <_PyEval_EvalFrameDefault+19719>, 
+          0x5a28b8653a75 <_PyEval_EvalFrameDefault+21077>, 
+          0x5a28b8651a38 <_PyEval_EvalFrameDefault+12824>, 
+          0x5a28b8650678 <_PyEval_EvalFrameDefault+7768>, 
+          0x5a28b8652c42 <_PyEval_EvalFrameDefault+17442>, 
+          0x5a28b865574b <_PyEval_EvalFrameDefault+28459>, 
+          0x5a28b865190a <_PyEval_EvalFrameDefault+12522>, 
+          0x5a28b864ff17 <_PyEval_EvalFrameDefault+5879>, 
+          0x5a28b864e9b8 <_PyEval_EvalFrameDefault+408>, 
+          0x5a28b864e961 <_PyEval_EvalFrameDefault+321>, 
+          0x5a28b8654bc6 <_PyEval_EvalFrameDefault+25510>, 
+          0x5a28b8652dfb <_PyEval_EvalFrameDefault+17883>, 
+          0x5a28b864ee79 <_PyEval_EvalFrameDefault+1625>, 
+          0x5a28b86525f5 <_PyEval_EvalFrameDefault+15829>, 
+          0x5a28b86544e7 <_PyEval_EvalFrameDefault+23751>, 
+          0x5a28b86538f7 <_PyEval_EvalFrameDefault+20695>, 
+          0x5a28b8650271 <_PyEval_EvalFrameDefault+6737>, 
+          0x5a28b8651ccd <_PyEval_EvalFrameDefault+13485>, 
+          0x5a28b8652179 <_PyEval_EvalFrameDefault+14681>, 
+          0x5a28b8655bc2 <_PyEval_EvalFrameDefault+29602>, 
+          0x5a28b865423c <_PyEval_EvalFrameDefault+23068>, 
+          0x5a28b86541cb <_PyEval_EvalFrameDefault+22955>, 
+          0x5a28b8653bfb <_PyEval_EvalFrameDefault+21467>, 
+          0x5a28b86551c4 <_PyEval_EvalFrameDefault+27044>, 
+          0x5a28b8652903 <_PyEval_EvalFrameDefault+16611>, 
+          0x5a28b86508bc <_PyEval_EvalFrameDefault+8348>, 
+          0x5a28b864ea7e <_PyEval_EvalFrameDefault+606>, 
+          0x5a28b8567c55 <_PyEval_EvalFrameDefault-945099>, 
+          0x5a28b8567c55 <_PyEval_EvalFrameDefault-945099>, 
+          0x5a28b864f186 <_PyEval_EvalFrameDefault+2406>, 
+          0x5a28b86513a5 <_PyEval_EvalFrameDefault+11141>, 
+          0x5a28b86542aa <_PyEval_EvalFrameDefault+23178>, 
+          0x5a28b865413c <_PyEval_EvalFrameDefault+22812>, 
+          0x5a28b8565acb <_PyEval_EvalFrameDefault-953685>, 
+          0x5a28b865441d <_PyEval_EvalFrameDefault+23549>, 
+          0x5a28b8567c55 <_PyEval_EvalFrameDefault-945099> <repeats 60 times>, 
+          0x5a28b85653fe <_PyEval_EvalFrameDefault-955426>, 
+          0x5a28b8654c71 <_PyEval_EvalFrameDefault+25681>, 
+          0x5a28b85674fe <_PyEval_EvalFrameDefault-946978>, 
+          0x5a28b8655670 <_PyEval_EvalFrameDefault+28240>, 
+          0x5a28b8566434 <_PyEval_EvalFrameDefault-951276>, 
+          0x5a28b8655332 <_PyEval_EvalFrameDefault+27410>, 
+          0x5a28b856803d <_PyEval_EvalFrameDefault-944099>, 
+          0x5a28b85657f5 <_PyEval_EvalFrameDefault-954411>, 
+          0x5a28b8567272 <_PyEval_EvalFrameDefault-947630>, 
+          0x5a28b8567070 <_PyEval_EvalFrameDefault-948144>, 
+          0x5a28b8654edf <_PyEval_EvalFrameDefault+26303>, 
+          0x5a28b8566285 <_PyEval_EvalFrameDefault-951707>, 
+          0x5a28b8654d00 <_PyEval_EvalFrameDefault+25824>...}
+#17 0x00005a28b87071bf in PyEval_EvalCode (co=co@entry=0x1209674f08a0, 
+    globals=globals@entry=0x120967509680, locals=locals@entry=0x120967509680)
+    at /usr/local/src/conda/python-3.12.12/Python/ceval.c:580
+        tstate = 0x5a28b8ae2910 <_PyRuntime+458992>
+        builtins = <optimized out>
+        desc = {fc_globals = 0x120967509680, fc_builtins = 0x1209674acd00, 
+          fc_name = 0x5a28b8a78610 <_PyRuntime+24048>, 
+          fc_qualname = 0x5a28b8a78610 <_PyRuntime+24048>, 
+          fc_code = 0x1209674f08a0, fc_defaults = 0x0, fc_kwdefaults = 0x0, 
+          fc_closure = 0x0}
+        func = 0x1209674ee200
+        res = <optimized out>
+#18 0x00005a28b8742f4a in run_eval_code_obj (
+    tstate=tstate@entry=0x5a28b8ae2910 <_PyRuntime+458992>, 
+    co=co@entry=0x1209674f08a0, globals=globals@entry=0x120967509680, 
+    locals=locals@entry=0x120967509680)
+    at /usr/local/src/conda/python-3.12.12/Python/pythonrun.c:1757
+        v = <optimized out>
+#19 0x00005a28b873da75 in run_mod (mod=mod@entry=0x5a28dbd5eeb8, 
+    filename=filename@entry=0x12096745eaa0, 
+    globals=globals@entry=0x120967509680, locals=locals@entry=0x120967509680, 
+    flags=flags@entry=0x7ffedb9f2e80, arena=arena@entry=0x12096742fcb0)
+    at /usr/local/src/conda/python-3.12.12/Python/pythonrun.c:1778
+        tstate = 0x5a28b8ae2910 <_PyRuntime+458992>
+        co = 0x1209674f08a0
+        v = <optimized out>
+#20 0x00005a28b873aa80 in pyrun_file (fp=fp@entry=0x5a28dbc90ea0, 
+    filename=filename@entry=0x12096745eaa0, start=start@entry=257, 
+    globals=globals@entry=0x120967509680, locals=locals@entry=0x120967509680, 
+    closeit=closeit@entry=1, flags=0x7ffedb9f2e80)
+    at /usr/local/src/conda/python-3.12.12/Python/pythonrun.c:1674
+        arena = 0x12096742fcb0
+        mod = 0x5a28dbd5eeb8
+        ret = <optimized out>
+#21 0x00005a28b873a746 in _PyRun_SimpleFileObject (fp=0x5a28dbc90ea0, 
+    filename=0x12096745eaa0, closeit=1, flags=0x7ffedb9f2e80)
+    at /usr/local/src/conda/python-3.12.12/Python/pythonrun.c:459
+        m = 0x1209674e5df0
+        d = 0x120967509680
+        v = <optimized out>
+        set_file_name = 1
+        ret = <optimized out>
+        pyc = <optimized out>
+#22 0x00005a28b873a474 in _PyRun_AnyFileObject (fp=0x5a28dbc90ea0, 
+    filename=filename@entry=0x12096745eaa0, closeit=closeit@entry=1, 
+    flags=flags@entry=0x7ffedb9f2e80)
+    at /usr/local/src/conda/python-3.12.12/Python/pythonrun.c:78
+        decref_filename = 0
+        res = <optimized out>
+#23 0x00005a28b873700e in pymain_run_file_obj (program_name=0x12096750c330, 
+    filename=0x12096745eaa0, skip_source_first_line=0)
+    at /usr/local/src/conda/python-3.12.12/Modules/main.c:361
+        fp = <optimized out>
+        sb = {st_dev = 66306, st_ino = 14734491, st_nlink = 1, 
+          st_mode = 33188, st_uid = 1273921, st_gid = 1000, __pad0 = 0, 
+          st_rdev = 0, st_size = 3731, st_blksize = 4096, st_blocks = 8, 
+          st_atim = {tv_sec = 1768305273, tv_nsec = 730085736}, st_mtim = {
+            tv_sec = 1768305265, tv_nsec = 563883243}, st_ctim = {
+            tv_sec = 1768305265, tv_nsec = 563883243}, __unused = {0, 0, 0}}
+        cf = {cf_flags = 0, cf_feature_version = 12}
+        run = <optimized out>
+        fp = <optimized out>
+        sb = <optimized out>
+        cf = <optimized out>
+        run = <optimized out>
+        ch = <optimized out>
+#24 pymain_run_file (config=0x5a28b8a854f0 <_PyRuntime+77008>)
+    at /usr/local/src/conda/python-3.12.12/Modules/main.c:380
+        filename = 0x12096745eaa0
+        program_name = 0x12096750c330
+        res = <optimized out>
+        filename = <optimized out>
+        program_name = <optimized out>
+        res = <optimized out>
+#25 pymain_run_python (exitcode=0x7ffedb9f2e54)
+    at /usr/local/src/conda/python-3.12.12/Modules/main.c:634
+        main_importer_path = <optimized out>
+        interp = 0x5a28b8a84ff0 <_PyRuntime+75728>
+        config = 0x5a28b8a854f0 <_PyRuntime+77008>
+        path0 = 0x12096745ea30
+        main_importer_path = <optimized out>
+        interp = <optimized out>
+        config = <optimized out>
+        error = <optimized out>
+        path0 = <optimized out>
+        done = <optimized out>
+        res = <optimized out>
+        _tmp_op_ptr = <optimized out>
+        _tmp_old_op = <optimized out>
+        wstr = <optimized out>
+        old_alloc = <optimized out>
+        res = <optimized out>
+#26 Py_RunMain () at /usr/local/src/conda/python-3.12.12/Modules/main.c:714
+        exitcode = 0
+#27 0x00005a28b86ef0f7 in Py_BytesMain (argc=<optimized out>, 
+    argv=<optimized out>)
+    at /usr/local/src/conda/python-3.12.12/Modules/main.c:768
+        args = {argc = 2, use_bytes_argv = 1, bytes_argv = 0x7ffedb9f30e8, 
+          wchar_argv = 0x0}
+#28 0x000012096722a1ca in __libc_start_call_main (
+    main=main@entry=0x5a28b86ef040 <main>, argc=argc@entry=2, 
+    argv=argv@entry=0x7ffedb9f30e8)
+    at ../sysdeps/nptl/libc_start_call_main.h:58
+        self = <optimized out>
+        result = <optimized out>
+        unwind_buf = {cancel_jmp_buf = {{jmp_buf = {140732583063784, 
+                -1577274540759178154, 2, 0, 0, 19831598759936, 
+                -1577274541449141162, 3599251667172336726}, 
+              mask_was_saved = 0}}, priv = {pad = {0x0, 0x0, 0x2, 0x0}, 
+            data = {prev = 0x0, cleanup = 0x0, canceltype = 2}}}
+        not_first_call = <optimized out>
+#29 0x000012096722a28b in __libc_start_main_impl (main=0x5a28b86ef040 <main>, 
+    argc=2, argv=0x7ffedb9f30e8, init=<optimized out>, fini=<optimized out>, 
+    rtld_fini=<optimized out>, stack_end=0x7ffedb9f30d8)
+    at ../csu/libc-start.c:360
+No locals.
+#30 0x00005a28b86eefa7 in _start ()
+No symbol table info available.
+[Inferior 1 (process 165699) detached]
+warning: File "/home/carosa/miniforge3/envs/sage/lib/python3.12/site-packages/sage/graphs/base/boost_graph.cpython-312-x86_64-linux-gnu.so" auto-loading has been declined by your `auto-load safe-path' set to "$debugdir:$datadir/auto-load".
+warning: 30	../sysdeps/unix/sysv/linux/wait4.c: No such file or directory
+Python Exception <class 'ModuleNotFoundError'>: No module named 'Cython'
+Error occurred in Python: No module named 'Cython'

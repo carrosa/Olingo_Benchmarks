@@ -6,7 +6,8 @@ from lazer import *  # import LaZer Python module
 import hashlib  # for SHAKE128
 from lazer import lin_prover_state_t, lin_verifier_state_t  # Explicit import
 from _ctxr_params_cffi import lib
-from ctxr_params import k, n, l, deg, qhat, sigma_tdec
+from ctxr_params import k, n, l, deg, q_hat, sigma_tdec, B, tail_bound_2
+from math import sqrt
 
 
 def decompose_vector(m: polyvec_t, B: int, ring: polyring_t):
@@ -47,17 +48,19 @@ def main():
     seed_3 = b"\03"
     seed_4 = b"\04"
 
-    log2o = math.log2(sigma_tdec / 1.55)
-    Rqhat = polyring_t(deg, qhat)
+    # log2o = math.log2(sigma_tdec / 1.55)
+    sigma = B/(tail_bound_2 * sqrt(deg))
+    log2o = math.log2(sigma / 1.55)
+    Rqhat = polyring_t(deg, q_hat)
 
     one_pol = poly_t(Rqhat, [1] + [0] * (deg - 1))  # Polynomial with one in the first coefficient
     
-    A1_prime = polymat_t.urandom_static(Rqhat, n, k-1, qhat, seed_1, 0)
+    A1_prime = polymat_t.urandom_static(Rqhat, n, k-1, q_hat, seed_1, 0)
     A1 = polymat_t(Rqhat, n, k, [one_pol, A1_prime])
     A_top_right = polymat_t(Rqhat, n, l)
     A_top = polymat_t(Rqhat, n, k+l, [A1, A_top_right])
 
-    A2_prime = polymat_t.urandom_static(Rqhat, l, k-l-n, qhat, seed_2, 0)
+    A2_prime = polymat_t.urandom_static(Rqhat, l, k-l-n, q_hat, seed_2, 0)
     A2_mid = polymat_t.identity(Rqhat, l)
     A2_left = polymat_t(Rqhat, l, n)
     A2 = polymat_t(Rqhat, l, k, [A2_left, A2_mid, A2_prime])
@@ -72,6 +75,8 @@ def main():
     # Binary
     r = polyvec_t.urandom_bnd_static(Rqhat, k, 0, 1, seed_3, 0)
     E = polyvec_t.grandom_static(Rqhat, l, int(log2o), seed_4, 0)
+    # E2_0, E2_1 = decompose_vector(E)
+    # E2 = polyvec_t(Rqhat, l*2, [E2_0, E2_1])
     w = polyvec_t(Rqhat, k+l, [r, E])
     
     t = A*w
@@ -107,6 +112,7 @@ def main():
         start_time = time.time()
         verifier.verify(proof)
         end_time = time.time()
+        print(f"Verify time: {(end_time - start_time) * 1000:.2f} ms")
     except VerificationError as e:
         print("reject")
         print(e)

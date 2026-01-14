@@ -24,58 +24,57 @@ def decompose_vector(m: polyvec_t, B: int, ring: polyring_t):
 
 def main():
     # === Setup ===
-    from ctxr_params import mod, deg, dim, moddimEnc, secdimEnc, mhat, q_small, secdim, moddim, sigma_w, tail_bound_2, beta
+    from ctxr_params import mod, deg, dim, moddim_hat, secdim_hat, m, q, secdim, moddim, sigma_y, tail_bound_2, beta
 
-    d, p, m, n, khat, lhat, mhat, q = deg, mod, dim[0], dim[1], moddimEnc, secdimEnc, mhat, q_small
 
     seed = b'\0' * 32  # public randomness (proof seed)
     prover = lin_prover_state_t(seed, lib.get_params("param"))
     verifier = lin_verifier_state_t(seed, lib.get_params("param"))
 
-    Rp = polyring_t(d, p)
+    Rp = polyring_t(deg, mod)
 
 
     # === Matrix A = [A1 | A2 | A3] ===
     dom_A1 = 0  # domain separator
 
     # A1 ∈ Rp^{m × khat} : uniformly random
-    A1 = polymat_t.urandom_static(Rp, m, khat, p, seed, dom_A1)
+    A1 = polymat_t.urandom_static(Rp, dim[0], moddim_hat, mod, seed, dom_A1)
 
 
     # A2 ∈ Rp^{m × lhat} : stacked [q*I_lhat ; 0]
-    I_lhat = polymat_t.identity(Rp, lhat)
+    I_lhat = polymat_t.identity(Rp, secdim_hat)
     qI_lhat = q * I_lhat
-    Z_lhat = polymat_t(Rp, mhat, lhat)
+    Z_lhat = polymat_t(Rp, m, secdim_hat)
 
-    A2 = polymat_t(Rp, m, lhat)
-    for i in range(lhat):
+    A2 = polymat_t(Rp, dim[0], secdim_hat)
+    for i in range(secdim_hat):
         A2.set_row(i, qI_lhat.get_row(i).copy())
-    for i in range(mhat):
-        A2.set_row(lhat + i, Z_lhat.get_row(i).copy())
+    for i in range(m):
+        A2.set_row(secdim_hat + i, Z_lhat.get_row(i).copy())
 
     # A3 ∈ Rp^{m × mhat + 2*secdim} : stacked [0 ; q*I | I] (stacked not correct)
-    Z_top = polymat_t(Rp, lhat, mhat + 2*secdim)
-    I_mhat = polymat_t.identity(Rp, mhat)
+    Z_top = polymat_t(Rp, secdim_hat, m + 2*secdim)
+    I_mhat = polymat_t.identity(Rp, m)
     qI_mhat = q * I_mhat
     m_mat_top = polymat_t.identity(Rp, 2*secdim)
-    m_mat_bot = polymat_t(Rp, mhat-2*secdim, 2*secdim)
-    m_mat = polymat_t(Rp, mhat, 2*secdim)
+    m_mat_bot = polymat_t(Rp, m-2*secdim, 2*secdim)
+    m_mat = polymat_t(Rp, m, 2*secdim)
     for i in range(2*secdim):
         m_mat.set_row(i, m_mat_top.get_row(i).copy())
-    for i in range(mhat - 2*secdim):
+    for i in range(m - 2*secdim):
         m_mat.set_row(2*secdim + i, m_mat_bot.get_row(i).copy())
-    A3_bottom = polymat_t(Rp, mhat, mhat + 2*secdim, [qI_mhat, m_mat])
+    A3_bottom = polymat_t(Rp, m, m + 2*secdim, [qI_mhat, m_mat])
 
-    A3 = polymat_t(Rp, m, mhat + 2*secdim)
-    for i in range(lhat):
+    A3 = polymat_t(Rp, dim[0], m + 2*secdim)
+    for i in range(secdim_hat):
         A3.set_row(i, Z_top.get_row(i).copy())
-    for i in range(mhat):
-        A3.set_row(lhat + i, A3_bottom.get_row(i).copy())
+    for i in range(m):
+        A3.set_row(secdim_hat + i, A3_bottom.get_row(i).copy())
 
     
     
     # Final matrix A ∈ Rp^{m × n}
-    A = polymat_t(Rp, m, n, [A1, A2, A3])
+    A = polymat_t(Rp, dim[0], dim[1], [A1, A2, A3])
 
     # === Build s = [r || e1 || e2 || m] ===
     # Derive seeds for reproducible randomness
@@ -85,13 +84,13 @@ def main():
     seed_m  = hashlib.shake_128(seed + b"m").digest(32)
 
     # r, e1, e2: binomial distribution with η = 2
-    r = polyvec_t.brandom_static(Rp, khat, 2, seed_r, 0)
-    e1 = polyvec_t.brandom_static(Rp, lhat, 2, seed_e1, 0)
-    e2 = polyvec_t.brandom_static(Rp, mhat, 2, seed_e2, 0)
+    r = polyvec_t.brandom_static(Rp, moddim_hat, 2, seed_r, 0)
+    e1 = polyvec_t.brandom_static(Rp, secdim_hat, 2, seed_e1, 0)
+    e2 = polyvec_t.brandom_static(Rp, m, 2, seed_e2, 0)
 
     # m: uniform in [0, q)
     # msg = polyvec_t.urandom_bnd_static(Rp, mhat, 0, q, seed_m, 0)
-    log2o = math.log2(sigma_w / 1.55)
+    log2o = math.log2(sigma_y / 1.55)
     # tail_bound_2*sigma_w*math.sqrt(secdim*deg)
     msg_og = polyvec_t.grandom_static(Rp, secdim, int(log2o), seed_m, 0, 0)
     # msg = polyvec_t.brandom_static(Rp, mhat, 2, seed_m, 0)
@@ -104,7 +103,7 @@ def main():
 
     # Full ciphertext vector s ∈ Rp^n (r || e1 || e2 || m)
     # s = polyvec_t(Rp, n, [r, e1, e2, msg])
-    s = polyvec_t(Rp, n, [r, e1, e2, m0, m1])
+    s = polyvec_t(Rp, dim[1], [r, e1, e2, m0, m1])
     # A = polymat_t.urandom_static(Rp, m, n, p, seed_e1, 0)
     # s = polyvec_t.urandom_bnd_static(Rp, n, 0, 1, seed, 0)
 

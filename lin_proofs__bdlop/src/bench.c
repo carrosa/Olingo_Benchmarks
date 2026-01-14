@@ -35,7 +35,7 @@ void bench_compute(int benches) {
 }
 
 void bench_print() {
-	const double cpu_freq_hz = 2600.0e6; // 2.6 GHz CPU
+	const double cpu_freq_hz = 5500.0e6; // 5.5 GHz CPU
     double seconds = (double) total / cpu_freq_hz;
     double milliseconds = seconds * 1000.0;
 

@@ -2,6 +2,7 @@
 #include "bench.h"
 #include "common.h"
 #include "sample_z_small.h"
+#include <gmp.h>
 #include <sys/random.h>
 #include <array>
 
@@ -19,7 +20,7 @@ using namespace std;
  */
 // This function tests if the norm of a polynomial `r` is less than a certain bound.
 // The bound is determined by the parameter `sigma_sqr`.
-bool bdlop_test_norm(params::poly_q r, uint64_t sigma_sqr)
+bool bdlop_test_norm(params::poly_q r, double sigma_sqr)
 {
     // Declare an array to store the coefficients of the polynomial `r`.
     array<mpz_t, params::poly_q::degree> coeffs;

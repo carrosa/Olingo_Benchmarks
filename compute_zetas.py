@@ -89,11 +89,10 @@ def print_c_format_params_and_consts(q, n, zeta, omont, small_q):
 if __name__ == "__main__":
     n = 256
     mont = 128
-    small_q = 562949953438721
-    q = 169754086842540358005352209309511681
+    small_q = 81623040078337
+    q = 23473657271235664258052971185590273
     zeta = primitive_2nth_root(q, n)
     zeta = int(zeta)
     print_zetas(compute_zetas(q, zeta, 2**mont, n))
     print_c_format_params_and_consts(q, n, zeta, 2**mont, small_q) # For optimization for avx2
-    print(find_prime_of_size(63, 256))
 

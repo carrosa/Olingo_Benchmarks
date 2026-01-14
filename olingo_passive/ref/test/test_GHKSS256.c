@@ -7,7 +7,7 @@
 #include "../gaussian_ref.h"
 #include <assert.h>
 
-#define CPU_FREQ 2600000000 // in Hz
+#define CPU_FREQ 5500000000 // in Hz
 
 
 
@@ -16,7 +16,7 @@ void print_timing(uint64_t start, uint64_t end, const char *label)
     uint64_t cycles = end - start;
     double time_in_seconds = (double)cycles / CPU_FREQ;
     double time_in_ms = time_in_seconds * 1000;
-    // printf("%s: %f seconds\n", label, time_in_seconds);
+    printf("%s: %f seconds\n", label, time_in_seconds);
     printf("%s: %f ms\n", label, time_in_ms);
 }
 
@@ -25,6 +25,7 @@ static inline uint64_t get_cycles()
     unsigned int aux;
     return __rdtscp(&aux);
 }
+
 
 void gen_message_1d(poly *Msg) // Accepts poly Msg[M] as a pointer
 {

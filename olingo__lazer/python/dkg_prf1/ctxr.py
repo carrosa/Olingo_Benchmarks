@@ -23,6 +23,7 @@ def decompose_vector(m: polyvec_t, B: int, ring: polyring_t):
         m1.append(poly_t(ring, tmp))
     return m0, m1
 
+
 def check_large_coeffs(label, vec, qhat):
     print(f"Checking {label}...")
     for i, pol in enumerate(vec.to_pol_list()):
@@ -34,49 +35,52 @@ def check_large_coeffs(label, vec, qhat):
     print(f"{label}: all coefficients < 2·qhat")
     return None
 
+
 def main():
     # === Setup ===
-    from ctxr_params import deg, qhat, sigma_tdec, dim
+    from ctxr_params import deg, q_hat, dim, cmt_n, cmt_k, cmt_l, secdim_hat, m
 
     seed = b"\0" * 32  # public randomness (proof seed)
     prover = lin_prover_state_t(seed, lib.get_params("param"))
     verifier = lin_verifier_state_t(seed, lib.get_params("param"))
-    
+
     seed_1 = b"\01"
     seed_2 = b"\02"
     seed_3 = b"\03"
     seed_4 = b"\04"
 
-    log2o = math.log2(sigma_tdec / 1.55)
-    Rqhat = polyring_t(deg, qhat)
+    Rqhat = polyring_t(deg, q_hat)
 
-    one_pol = poly_t(Rqhat, [1] + [0] * (deg - 1))  # Polynomial with one in the first coefficient
-    
-    A1_prime = polymat_t.urandom_static(Rqhat, 1, 24, qhat, seed_1, 0)
-    A1 = polymat_t(Rqhat, 1, 25, [one_pol, A1_prime])
-    A_top_right = polymat_t(Rqhat, 1, 22)
-    A_top = polymat_t(Rqhat, 1, 47, [A1, A_top_right])
+    one_pol = poly_t(
+        Rqhat, [1] + [0] * (deg - 1)
+    )  # Polynomial with one in the first coefficient
 
-    A2_prime = polymat_t.urandom_static(Rqhat, 22, 2, qhat, seed_2, 0)
-    A2_mid = polymat_t.identity(Rqhat, 22)
-    A2_left = polymat_t(Rqhat, 22, 1)
-    A2 = polymat_t(Rqhat, 22, 25, [A2_left, A2_mid, A2_prime])
-    I22 = polymat_t.identity(Rqhat, 22)
-    A_bot = polymat_t(Rqhat, 22, 47, [A2, I22])
-    
-    A = polymat_t(Rqhat, 23, 47)
-    for row in range(1, 23):
+    A1_prime = polymat_t.urandom_static(Rqhat, cmt_n, cmt_k - cmt_n, q_hat, seed_1, 0)
+    A1 = polymat_t(Rqhat, cmt_n, cmt_k, [one_pol, A1_prime])
+    A_top_right = polymat_t(Rqhat, 1, cmt_l)
+    A_top = polymat_t(Rqhat, 1, cmt_k + cmt_l, [A1, A_top_right])
+
+    A2_prime = polymat_t.urandom_static(
+        Rqhat, cmt_l, cmt_k - cmt_n - cmt_l, q_hat, seed_2, 0
+    )
+    A2_mid = polymat_t.identity(Rqhat, cmt_l)
+    A2_left = polymat_t(Rqhat, cmt_l, cmt_n)
+    A2 = polymat_t(Rqhat, cmt_l, cmt_k, [A2_left, A2_mid, A2_prime])
+    I22 = polymat_t.identity(Rqhat, cmt_l)
+    A_bot = polymat_t(Rqhat, cmt_l, cmt_k + cmt_l, [A2, I22])
+
+    A = polymat_t(Rqhat, cmt_n + cmt_l, cmt_k + cmt_l)
+    for row in range(1, cmt_n + cmt_l):
         A.set_row(row, A_bot.get_row(row - 1))
     A.set_row(0, A_top.get_row(0))
 
     # Binary
-    r = polyvec_t.urandom_bnd_static(Rqhat, 25, 0, 1, seed_3, 0)
-    S = polyvec_t.urandom_bnd_static(Rqhat, 22, 0, 1, seed_4, 0)
+    r = polyvec_t.urandom_bnd_static(Rqhat, cmt_k, 0, 1, seed_3, 0)
+    S = polyvec_t.urandom_bnd_static(Rqhat, cmt_l, 0, 1, seed_4, 0)
     # E = polyvec_t.grandom_static(Rqhat, 22, int(log2o), seed_4, 0)
-    w = polyvec_t(Rqhat, 47, [r, S])
-    
-    t = A*w
+    w = polyvec_t(Rqhat, cmt_k + cmt_l, [r, S])
 
+    t = A * w
 
     # === Prover setup ===
     print("set_statement...")
@@ -95,10 +99,15 @@ def main():
 
     # Report proof time and size
     elapsed_ms = (end_time - start_time) * 1000
+    elapsed_ms_xm = (end_time - start_time) * 1000 * m
     proof_size_bits = len(proof) * 8
+    proof_size_bits_xm = len(proof) * 8 * m
     proof_size_kb = proof_size_bits / 8000  # 1 KB = 8000 bits
-    print(f"Prover time: {elapsed_ms:.2f} ms")
-    print(f"Proof size: {proof_size_bits} bits ({proof_size_kb:.2f} KB)")
+    proof_size_kb_xm = proof_size_bits_xm / 8000  # 1 KB = 8000 bits
+    print(f"Prover time: {elapsed_ms:.2f} ms per column")
+    print(f"Prover time time: {elapsed_ms_xm:.2f} ms for {secdim_hat}x{m}")
+    print(f"Proof size: {proof_size_bits} bits ({proof_size_kb:.2f} KB) per column")
+    print(f"Proof size: {proof_size_bits_xm} bits ({proof_size_kb_xm:.2f} KB) for {secdim_hat}x{m}")
 
     # === Verifier ===
     verifier.set_statement(A, -t)
@@ -109,7 +118,9 @@ def main():
         verifier.verify(proof)
         end_time = time.time()
         elapsed_ms = (end_time - start_time) * 1000
-        print(f"Verify time: {elapsed_ms:.2f} ms")
+        elapsed_ms_xm = (end_time - start_time) * 1000 * m
+        print(f"Verify time: {elapsed_ms:.2f} ms per column")
+        print(f"Verify time: {elapsed_ms_xm:.2f} ms for {secdim_hat}x{m}")
     except VerificationError as e:
         print("reject")
         print(e)
