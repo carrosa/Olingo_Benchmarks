@@ -6,7 +6,7 @@ from estimator.lwe_dual import dual_hybrid
 
 # Security parameter
 
-secpar = 256
+secpar = 128
 
 print("Security level: ", secpar)
 
@@ -85,11 +85,11 @@ while ((2**nu) * binomial(ringdim,nu) <2**secpar):
 if balanced == 1:
 	num = floor(log(nu,2).n()) # log2 of challspace 1-norm
 	kappa_y = floor(log(sigma_w * sqrt(t * (1+secdim/moddim))/2,2)) - num
-	print("kappa_y = ", kappa_y)
+	#print("kappa_y = ", kappa_y)
 	kappa_w = kappa_y + num - 1
-	print("kappa_w = ", kappa_w)
-	print("first term bits = ",log(nu*2**(kappa_y),2).n())
-	print("second term bits = ",log(2**(kappa_w+1),2).n())
+	#print("kappa_w = ", kappa_w)
+	#print("first term bits = ",log(nu*2**(kappa_y),2).n())
+	#print("second term bits = ",log(2**(kappa_w+1),2).n())
 
 # Gaussian widths for s and r, set according to Raccoon analysis
 
@@ -149,13 +149,13 @@ q = round(2^logq)
 while  (q % (2*ringdim) != 1) or (gcd(q-1, 2*ringdim) == 1):   #setting for NTT friendliness
 	q = next_prime(q)
 assert(B_MSIS < (q-1)/2)
-print("q set at ", log(q,2).n(), " bits")
+#print("q set at ", log(q,2).n(), " bits")
 print("----------------------------------------------------------------------------------------------")
 
 
 print("Signature parameters: ", "( N =", ringdim, ", q bits=", round(log(q,2)), ", #sigs = 2^",log(Q,2), ", chalspace 1-norm =", nu, ", kappa_y =", kappa_y, ", kappa_w =", kappa_w, ", mod dim =", moddim, ", sec dim =", secdim, ", sigma_y =", log(sigma_y,2).n(), " bits",  ", sigma_w =", log(sigma_w,2).n(), " bits", ")")
 
-
+print("----------------------------------------------------------------------------------------------")
 print("----------")
 print("Start LWE estimation")
 print("----------")
@@ -232,11 +232,11 @@ sigma_B = sqrt(2/3)
 
 B_2 = nu * n * moddimhat * tail_bound_2 * sigma_B * ringdim * tail_bound_2 * sigma_ctx + n * nu * p * tail_bound_2 * sigma_ctx*sqrt(ringdim) + p * nu * n * secdimhat * tail_bound_2 *sigma_B * ringdim * tail_bound_2 * sigma_ctx + t * tail_bound_2 * sigma_B * ringdim * tail_bound_2 * sigma_ctx * moddimhat + p * t * tail_bound_2 * sigma_ctx * sqrt(ringdim) + t * p * secdimhat * tail_bound_2 * sigma_B * ringdim *tail_bound_2 * sigma_ctx
 
-print("B_2 bits = ", log(B_2,2).n())
-print("p bits =", log(p,2).n())
+#print("B_2 bits = ", log(B_2,2).n())
+#print("p bits =", log(p,2).n())
 
 sigma_tdec = sqrt(Q * B_2**2 / p**2)
-print("sigma_tdec = ", sigma_tdec.n(100))
+#print("sigma_tdec = ", sigma_tdec.n(100))
 
 B_dec = nu * n * tail_bound_2 * sigma_y * sqrt(ringdim * secdim) + t * tail_bound_2 * sigma_w * sqrt(ringdim * secdim) + B_2 + p * t * tail_bound_2 * sigma_tdec 
 q_enc = ((B_dec) * 2).n()
@@ -248,7 +248,9 @@ log_q_enc = log(q_enc_actual,2)
 #print("q_enc:",str(q_enc_actual))
 #print("log q_enc:", N(log_q_enc))
 
+print("----------------------------------------------------------------------------------------------")
 print("HE parameters: ", "( N =", ringdim, ", qhat bits=", N(log_q_enc,4), ", secdimhat =", secdimhat, ", moddimhat = ", moddimhat, ", m = ", m, ", secdim = ", secdim, ", moddim = ", moddim, ")")
+print("----------------------------------------------------------------------------------------------")
 
 
 v_enc_lwe_param = LWE.Parameters(n=ceil(ringdim*m), q=q_enc_actual, Xs=ND.DiscreteGaussian(sigma_ctx), Xe=ND.DiscreteGaussian(sigma_ctx),m=2**60, tag='HE LWE v')
