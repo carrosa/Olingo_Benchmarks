@@ -72,109 +72,109 @@ static void lin_hash(params::poly_q &beta, comkey_t &key, commit_t x,
   nfl::fastrandombytes_reseed();
 }
 
-static void lin_hash(params::poly_q &beta, comkey_t &key, commit_t x,
-                     commit_t y, params::poly_q alpha[22], params::poly_q &u,
-                     params::poly_q t, params::poly_q _t) {
-  uint8_t hash[BLAKE3_OUT_LEN];
-  blake3_hasher hasher;
+// static void lin_hash(params::poly_q &beta, comkey_t &key, commit_t x,
+//                      commit_t y, params::poly_q alpha[22], params::poly_q &u,
+//                      params::poly_q t, params::poly_q _t) {
+//   uint8_t hash[BLAKE3_OUT_LEN];
+//   blake3_hasher hasher;
 
-  blake3_hasher_init(&hasher);
+//   blake3_hasher_init(&hasher);
 
-  /* Hash public key. */
-  for (size_t i = 0; i < HEIGHT; i++) {
-    for (int j = 0; j < WIDTH - HEIGHT; j++) {
-      blake3_hasher_update(&hasher, (const uint8_t *)key.A1[i][j].data(),
-                           16 * DEGREE);
-    }
-  }
-  for (size_t j = 0; j < WIDTH; j++) {
-    blake3_hasher_update(&hasher, (const uint8_t *)key.A2[0][j].data(),
-                         16 * DEGREE);
-  }
+//   /* Hash public key. */
+//   for (size_t i = 0; i < HEIGHT; i++) {
+//     for (int j = 0; j < WIDTH - HEIGHT; j++) {
+//       blake3_hasher_update(&hasher, (const uint8_t *)key.A1[i][j].data(),
+//                            16 * DEGREE);
+//     }
+//   }
+//   for (size_t j = 0; j < WIDTH; j++) {
+//     blake3_hasher_update(&hasher, (const uint8_t *)key.A2[0][j].data(),
+//                          16 * DEGREE);
+//   }
 
-  /* Hash alpha, beta from linear relation. */
-  for (size_t i = 0; i < SIZE; i++) {
-    blake3_hasher_update(&hasher, (const uint8_t *)alpha[i].data(),
-                         16 * DEGREE);
-  }
+//   /* Hash alpha, beta from linear relation. */
+//   for (size_t i = 0; i < SIZE; i++) {
+//     blake3_hasher_update(&hasher, (const uint8_t *)alpha[i].data(),
+//                          16 * DEGREE);
+//   }
 
-  blake3_hasher_update(&hasher, (const uint8_t *)x.c1.data(), 16 * DEGREE);
-  blake3_hasher_update(&hasher, (const uint8_t *)y.c1.data(), 16 * DEGREE);
-  for (size_t i = 0; i < x.c2.size(); i++) {
-    blake3_hasher_update(&hasher, (const uint8_t *)x.c2[i].data(), 16 * DEGREE);
-    blake3_hasher_update(&hasher, (const uint8_t *)y.c2[i].data(), 16 * DEGREE);
-  }
+//   blake3_hasher_update(&hasher, (const uint8_t *)x.c1.data(), 16 * DEGREE);
+//   blake3_hasher_update(&hasher, (const uint8_t *)y.c1.data(), 16 * DEGREE);
+//   for (size_t i = 0; i < x.c2.size(); i++) {
+//     blake3_hasher_update(&hasher, (const uint8_t *)x.c2[i].data(), 16 * DEGREE);
+//     blake3_hasher_update(&hasher, (const uint8_t *)y.c2[i].data(), 16 * DEGREE);
+//   }
 
-  blake3_hasher_update(&hasher, (const uint8_t *)u.data(), 16 * DEGREE);
-  blake3_hasher_update(&hasher, (const uint8_t *)t.data(), 16 * DEGREE);
-  blake3_hasher_update(&hasher, (const uint8_t *)_t.data(), 16 * DEGREE);
+//   blake3_hasher_update(&hasher, (const uint8_t *)u.data(), 16 * DEGREE);
+//   blake3_hasher_update(&hasher, (const uint8_t *)t.data(), 16 * DEGREE);
+//   blake3_hasher_update(&hasher, (const uint8_t *)_t.data(), 16 * DEGREE);
 
-  blake3_hasher_finalize(&hasher, hash, BLAKE3_OUT_LEN);
+//   blake3_hasher_finalize(&hasher, hash, BLAKE3_OUT_LEN);
 
-  /* Sample challenge from RNG seeded with hash. */
-  nfl::fastrandombytes_seed(hash);
-  bdlop_sample_chal(beta);
-  nfl::fastrandombytes_reseed();
-}
+//   /* Sample challenge from RNG seeded with hash. */
+//   nfl::fastrandombytes_seed(hash);
+//   bdlop_sample_chal(beta);
+//   nfl::fastrandombytes_reseed();
+// }
 
-static void poly_inverse(params::poly_q &inv, params::poly_q p) {
-  std::array<mpz_t, params::poly_q::degree> coeffs;
-  fmpz_t q;
-  fmpz_mod_poly_t poly, irred;
-  fmpz_mod_ctx_t ctx_q;
+// static void poly_inverse(params::poly_q &inv, params::poly_q p) {
+//   std::array<mpz_t, params::poly_q::degree> coeffs;
+//   fmpz_t q;
+//   fmpz_mod_poly_t poly, irred;
+//   fmpz_mod_ctx_t ctx_q;
 
-  fmpz_init(q);
-  for (size_t i = 0; i < params::poly_q::degree; i++) {
-    mpz_init2(coeffs[i], (params::poly_q::bits_in_moduli_product() << 2));
-  }
+//   fmpz_init(q);
+//   for (size_t i = 0; i < params::poly_q::degree; i++) {
+//     mpz_init2(coeffs[i], (params::poly_q::bits_in_moduli_product() << 2));
+//   }
 
-  fmpz_set_mpz(q, params::poly_q::moduli_product());
-  fmpz_mod_ctx_init(ctx_q, q);
-  fmpz_mod_poly_init(poly, ctx_q);
-  fmpz_mod_poly_init(irred, ctx_q);
+//   fmpz_set_mpz(q, params::poly_q::moduli_product());
+//   fmpz_mod_ctx_init(ctx_q, q);
+//   fmpz_mod_poly_init(poly, ctx_q);
+//   fmpz_mod_poly_init(irred, ctx_q);
 
-  p.poly2mpz(coeffs);
-  fmpz_mod_poly_set_coeff_ui(irred, params::poly_q::degree, 1, ctx_q);
-  fmpz_mod_poly_set_coeff_ui(irred, 0, 1, ctx_q);
+//   p.poly2mpz(coeffs);
+//   fmpz_mod_poly_set_coeff_ui(irred, params::poly_q::degree, 1, ctx_q);
+//   fmpz_mod_poly_set_coeff_ui(irred, 0, 1, ctx_q);
 
-  for (size_t i = 0; i < params::poly_q::degree; i++) {
-    fmpz_mod_poly_set_coeff_mpz(poly, i, coeffs[i], ctx_q);
-  }
-  fmpz_mod_poly_invmod(poly, poly, irred, ctx_q);
+//   for (size_t i = 0; i < params::poly_q::degree; i++) {
+//     fmpz_mod_poly_set_coeff_mpz(poly, i, coeffs[i], ctx_q);
+//   }
+//   fmpz_mod_poly_invmod(poly, poly, irred, ctx_q);
 
-  for (size_t i = 0; i < params::poly_q::degree; i++) {
-    fmpz_mod_poly_get_coeff_mpz(coeffs[i], poly, i, ctx_q);
-  }
+//   for (size_t i = 0; i < params::poly_q::degree; i++) {
+//     fmpz_mod_poly_get_coeff_mpz(coeffs[i], poly, i, ctx_q);
+//   }
 
-  inv.mpz2poly(coeffs);
+//   inv.mpz2poly(coeffs);
 
-  fmpz_clear(q);
-  for (size_t i = 0; i < params::poly_q::degree; i++) {
-    mpz_clear(coeffs[i]);
-  }
-}
+//   fmpz_clear(q);
+//   for (size_t i = 0; i < params::poly_q::degree; i++) {
+//     mpz_clear(coeffs[i]);
+//   }
+// }
 
-static void simul_inverse(params::poly_q inv[MSGS], params::poly_q m[MSGS]) {
-  params::poly_q u, t[MSGS];
-  inv[0] = m[0];
-  t[0] = m[0];
+// static void simul_inverse(params::poly_q inv[MSGS], params::poly_q m[MSGS]) {
+//   params::poly_q u, t[MSGS];
+//   inv[0] = m[0];
+//   t[0] = m[0];
 
-  for (size_t i = 1; i < MSGS; i++) {
-    t[i] = m[i];
-    inv[i] = inv[i - 1] * m[i];
-  }
+//   for (size_t i = 1; i < MSGS; i++) {
+//     t[i] = m[i];
+//     inv[i] = inv[i - 1] * m[i];
+//   }
 
-  u = inv[MSGS - 1];
-  u.invntt_pow_invphi();
-  poly_inverse(u, u);
-  u.ntt_pow_phi();
+//   u = inv[MSGS - 1];
+//   u.invntt_pow_invphi();
+//   poly_inverse(u, u);
+//   u.ntt_pow_phi();
 
-  for (size_t i = MSGS - 1; i > 0; i--) {
-    inv[i] = u * inv[i - 1];
-    u = u * t[i];
-  }
-  inv[0] = u;
-}
+//   for (size_t i = MSGS - 1; i > 0; i--) {
+//     inv[i] = u * inv[i - 1];
+//     u = u * t[i];
+//   }
+//   inv[0] = u;
+// }
 
 static int rej_sampling_ptrs(const vector<const params::poly_q *> &zptrs,
                              const vector<const params::poly_q *> &vptrs,
@@ -231,7 +231,10 @@ static int rej_sampling_ptrs(const vector<const params::poly_q *> &zptrs,
     return 1;
   }
 
-  getrandom(buf, sizeof buf, 0);
+  ssize_t got = getrandom(buf, sizeof buf, 0);
+  if (got != (ssize_t) sizeof buf){
+    abort();
+  }
   memcpy(&seed, buf, sizeof seed);
   gmp_randseed_ui(state, (unsigned long)seed);
   mpf_urandomb(u, state, mpf_get_default_prec());
@@ -262,7 +265,7 @@ static void lin_prover(params::poly_q y_E[WIDTH],
   params::poly_q chal, tmp[WIDTH], _tmp[SIZE][WIDTH];
   array<mpz_t, params::poly_q::degree> coeffs;
   mpz_t qDivBy2;
-  int rej0, rej1;
+  int rej1;
   double sigma_c =
       0.675 * (SIZE + 1) * 1.14 * sqrt(0.667) * NONZERO * sqrt(WIDTH * N);
 
@@ -534,14 +537,11 @@ inline params::poly_q make_q_inv_const() {
   return qinv;
 }
 
-static void matvec_mul(vector<params::poly_q> result,
-                       vector<vector<params::poly_q>> M,
-                       vector<params::poly_q> v, int size) {}
 
 inline void mul_alpha_c2(vector<params::poly_q> &result,
                          vector<params::poly_q> &c2, params::poly_q &alpha) {
   assert(result.size() == c2.size());
-  for (int i = 0; i < result.size(); i++) {
+  for (size_t i = 0; i < result.size(); i++) {
     result[i] = alpha * c2[i];
   }
 }
@@ -550,9 +550,9 @@ inline void mul_A2_y(vector<params::poly_q> &result,
                      vector<vector<params::poly_q>> &A2,
                      vector<params::poly_q> &y) {
   assert(result.size() == A2.size() && A2[0].size() == y.size());
-  for (int i = 0; i < A2.size(); i++) {
+  for (size_t i = 0; i < A2.size(); i++) {
     params::poly_q acc = A2[i][0] * y[0];
-    for (int j = 1; j < A2[i].size(); j++) {
+    for (size_t j = 1; j < A2[i].size(); j++) {
       acc = acc + A2[i][j] * y[j];
     }
     result[i] = acc;
@@ -575,17 +575,15 @@ static void bench_lin() {
   vector<vector<params::poly_q>> S_cols(
       SIZE, vector<params::poly_q>(SIZE)); // secret matrix
   params::poly_q uvec[SIZE];
-  params::poly_q ds[SIZE], beta[SIZE];
+  params::poly_q beta[SIZE];
 
   std::array<mpz_t, params::poly_q::degree> coeffs;
   for (size_t i = 0; i < params::poly_q::degree; i++) {
     mpz_init(coeffs[i]);
   }
-  int64_t coeff;
 
   int lambda = 1;
   params::poly_q alpha_scale = make_scale_poly(lambda);
-  params::poly_q invq = make_q_inv_const();
 
   params::poly_q lambda_poly = lambda;
   lambda_poly.ntt_pow_phi();
@@ -607,25 +605,24 @@ static void bench_lin() {
   }
 
   // Sample S_cols
-  for (int i = 0; i < SIZE; i++) {
+  for (size_t i = 0; i < SIZE; i++) {
     uvec[i] = nfl::uniform();
     uvec[i].ntt_pow_phi();
-    for (int j = 0; j < SIZE; j++) {
+    for (size_t j = 0; j < SIZE; j++) {
       S_cols[i][j] = nfl::ZO_dist();
       S_cols[i][j].ntt_pow_phi();
     }
   }
 
   // Sample E with coeffs gaussian sigmae
-  for (int i = 0; i < SIZE; i++) {
-    for (int j = 0; j < params::poly_q::degree; j++) {
+  for (size_t i = 0; i < SIZE; i++) {
+    for (size_t j = 0; j < params::poly_q::degree; j++) {
       int64_t coeff = sample_z(0.0, SIGMAE);
       mpz_set_si(coeffs[j], coeff);
     }
     E[i].mpz2poly(coeffs);
     E[i].ntt_pow_phi();
   }
-  params::poly_q zero = 0;
 
   bdlop_keygen(key);
   bdlop_sample_rand(r_E);
@@ -840,7 +837,7 @@ static void lin_prover_dkg(
     for (size_t i = 0; i < SIZE; ++i) {
       params::poly_q acc_row = 0;
 
-      for (size_t t = 0; t < THRESHOLD; ++t) {
+      for (int t = 0; t < THRESHOLD; ++t) {
         params::poly_q dot = key.A2[i][0] * y_Si[t][0];
         for (size_t j = 1; j < WIDTH; ++j)
           dot = dot + key.A2[i][j] * y_Si[t][j];
@@ -941,7 +938,7 @@ static int lin_verifier_dkg(vector<params::poly_q> &z_S,
   for (size_t i = 0; i < SIZE; ++i) {
     // LHS: sum_t lambda[t]*(A2*z_Si[t])  -  (A2*z_S)
     params::poly_q lhs = 0;
-    for (size_t t = 0; t < THRESHOLD; ++t) {
+    for (int t = 0; t < THRESHOLD; ++t) {
       params::poly_q dot = key.A2[i][0] * z_Si[t][0];
       for (size_t j = 1; j < WIDTH; ++j)
         dot = dot + key.A2[i][j] * z_Si[t][j];
@@ -955,7 +952,7 @@ static int lin_verifier_dkg(vector<params::poly_q> &z_S,
     // RHS: (sum_t lambda[t]*com_Si[t].c2[i] + beta[i] - com_S.c2[i]) * chal +
     // u[i]
     params::poly_q c2_combo = 0;
-    for (size_t t = 0; t < THRESHOLD; ++t)
+    for (int t = 0; t < THRESHOLD; ++t)
       c2_combo = c2_combo + (lambdai[t] * com_Si[t].c2[i]);
     c2_combo = c2_combo - com_S.c2[i];
 
@@ -1077,7 +1074,7 @@ static void lin_prover_dkg2(vector<vector<params::poly_q>> &y_Si,
   vector<vector<params::poly_q>> tmpi(FULL, vector<params::poly_q>(WIDTH));
   array<mpz_t, params::poly_q::degree> coeffs;
   mpz_t qDivBy2;
-  int rej0, rej1;
+  int rej1;
   mpz_init(qDivBy2);
   for (size_t i = 0; i < params::poly_q::degree; i++) {
     mpz_init2(coeffs[i], (params::poly_q::bits_in_moduli_product() << 2));

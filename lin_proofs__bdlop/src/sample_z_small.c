@@ -9,6 +9,7 @@
 #include "param.h"
 #include "fastrandombytes.h"
 #include "poly.h"
+#include <string.h>
 
 #include <x86intrin.h>
 
@@ -112,7 +113,9 @@ static inline uint64_t load_40(const unsigned char *x)
 
 static inline int64_t cosac_comp(const unsigned char *r, const double x)
 {
-    uint64_t res = *((uint64_t *)(&x));
+    // uint64_t res = *((uint64_t *)(&x));
+    uint64_t res;
+    memcpy(&res, &x, sizeof res);
     uint64_t res_mantissa;
     uint64_t res_exponent;
     uint64_t r1;
@@ -128,8 +131,8 @@ static inline int64_t cosac_comp(const unsigned char *r, const double x)
 
     r_mantissa = r1 & COSAC_R_MANTISSA_MASK;
     r_exponent = (r1 >> COSAC_R_MANTISSA_PRECISION) | (r2 << (64 - COSAC_R_MANTISSA_PRECISION));
-
-    return (res == COSAC_DOUBLE_ONE) || ((r_mantissa < res_mantissa) && (r_exponent < (1LL << res_exponent)));
+    uint64_t bound = (res_exponent >= 64) ? UINT64_MAX : (1ULL << res_exponent);
+    return (res == COSAC_DOUBLE_ONE) || ((r_mantissa < res_mantissa) && (r_exponent < bound));
 }
 
 /* New COSAC sampler.
