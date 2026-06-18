@@ -1,5 +1,7 @@
 #include "bench.h"
 #include "cpucycles.h"
+#include <stdint.h>
+#include <inttypes.h>
 
 static uint64_t before;
 static uint64_t after;
@@ -36,7 +38,8 @@ void bench_compute(int benches)
 void bench_print(void)
 {
     double time_sec = (double)total / CPU_FREQ;
-    printf("%llu cycles (%.6f seconds)\n\n", total, time_sec);
+    printf("%" PRIu64 " cycles (%.6f seconds)\n\n", total, time_sec);
+    // printf("%llu cycles (%.6f seconds)\n\n", total, time_sec);
 }
 
 

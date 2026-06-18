@@ -1,3 +1,6 @@
+#ifndef GAUSSIAN_REF_H
+#define GAUSSIAN_REF_H
+
 #include <stdint.h>
 #include "fastrandombytes.h"
 #include <x86intrin.h>
@@ -15,3 +18,5 @@ void gaussian_sampler_w(mpz_t *sample, uint32_t len); // sigma_r
 void gaussian_sampler_drown(mpz_t *s, uint32_t len); // sigma_tdec
 // void gaussian_sampler_bin(mpz_t *s, uint32_t len); //(subscript ctx) sigma sqrt 2/3
 void binary_sampler(mpz_t *s, uint32_t len);
+
+#endif

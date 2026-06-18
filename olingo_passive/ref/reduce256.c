@@ -36,18 +36,6 @@ void poly_init_mont(void)
   }
 }
 
-void montgomery_reduce_old(mpz_t r, mpz_t a, mpz_t t, mpz_t tmp)
-{
-  mp_size_t a_size = a->_mp_size;
-  mp_size_t abs_a_size = __GMP_ABS(a_size);
-  mp_size_t mod_size = mont_bits / GMP_NUMB_BITS;
-  if (abs_a_size > mod_size)
-  {
-    abs_a_size = mod_size;
-  }
-  mp_ptr t_limbs = t->_mp_d;
-}
-
 void montgomery_reduce(mpz_t r, mpz_t a)
 {
   mpz_t t, tmp;

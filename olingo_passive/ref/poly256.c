@@ -1,4 +1,8 @@
 #include "poly256.h"
+#include "fips202.h"
+#include "gaussian_ref.h"
+#include <gmp.h>
+#include <stdio.h>
 
 /* Return 1 if the two polynomials are equal (all coefficients match), or 0 otherwise. */
 int polycmp(const poly *p1, const poly *p2)
@@ -445,38 +449,49 @@ void poly_hash_shake256(
     keccak_state state;
     shake256_init(&state);
     // Compute space needed to be allocated
-    size_t coeff_bytes = (mpz_sizeinbase(GMP_Q, 2) + 7) / 8; // Ceiling of bits to bytes
-    size_t count = 0;
-
-    for (int i = 0; i < N; i++)
+    mpz_srcptr QQ = GMP_Q;
+    const size_t qbits = mpz_sizeinbase(QQ, 2);
+    const size_t coeff_bytes = (qbits + 7)/8; //(mpz_sizeinbase(GMP_Q, 2) + 7) / 8; // Ceiling of bits to bytes
+    uint8_t *slot = malloc(coeff_bytes);
+    if (slot == NULL)
     {
-        uint8_t tmp[coeff_bytes];
-        memset(tmp, 0, coeff_bytes);
-        size_t *data = mpz_export(tmp, NULL, 1, coeff_bytes, 1, 0, p->coeffs[i]);
-
-        int sign = mpz_sgn(p->coeffs[i]);
-        uint8_t sign_byte = (sign < 0) ? 1 : 0;
-        // shake256_absorb(&state, data, 1);
-        shake256_absorb(&state, &sign_byte, 1);
-        if (count > 0)
-        {
-            shake256_absorb(&state, (const uint8_t *)data, count * sizeof(mp_limb_t));
-            free(data);
-        }
+        fprintf(stderr, "OOM in poly_hash_shake256\n");
+        abort();
     }
+    mpz_t coeff;
+    mpz_init(coeff);
+    // size_t count = 0;
+
+    for (size_t i = 0; i < N; i++)
+    {
+        mpz_mod(coeff, p->coeffs[i], QQ);
+        memset(slot, 0, coeff_bytes);
+        size_t written = 0;
+        mpz_export(NULL, &written, 1,1,1,0, coeff);
+        if (written > coeff_bytes){
+            mpz_clear(coeff);
+            free(slot);
+            fprintf(stderr, "poly_hash_shake256 invariant failed\n");
+            abort();
+        }
+        mpz_export(slot + (coeff_bytes - written), NULL, 1,1,1,0, coeff);
+        shake256_absorb(&state, slot, coeff_bytes);
+    }
+    mpz_clear(coeff);
+    free(slot);
     shake256_finalize(&state);
     shake256_squeeze(hash, outlen, &state);
 }
 
 void poly_arr_hash_shake256(
-    const poly *arr,
+    poly *arr,
     size_t len,
     uint8_t *hash,
     size_t outlen)
 {
     keccak_state state;
     shake256_init(&state);
-    for (int i = 0; i < len; i++)
+    for (size_t i = 0; i < len; i++)
     {
         uint8_t tmp_hash[SHAKE256_RATE];
         poly_hash_shake256(&arr[i], tmp_hash, SHAKE256_RATE);
@@ -487,7 +502,7 @@ void poly_arr_hash_shake256(
 }
 
 void poly_matrix_hash_shake256(
-    const poly *mat,
+    poly *mat,
     size_t rows,
     size_t cols,
     uint8_t *hash,
@@ -541,9 +556,10 @@ void Hash(poly arr[K], uint8_t *hash)
 
     // Use the actual modulus used by your polys:
     // if your code uses GMP_q elsewhere, use that here too.
-    const mpz_t *QQ = &GMP_q;
+    // const mpz_t *QQ = &GMP_q;
+    const mpz_srcptr QQ = GMP_q;
 
-    const size_t qbits        = mpz_sizeinbase(*QQ, 2);
+    const size_t qbits        = mpz_sizeinbase(QQ, 2);
     const size_t coeff_bytes  = (qbits + 7) / 8;      // ceil(bits(q)/8)
     const size_t poly_bytes   = N * coeff_bytes;
     const size_t total_len    = K * poly_bytes;
@@ -558,8 +574,8 @@ void Hash(poly arr[K], uint8_t *hash)
             memset(slot, 0, coeff_bytes);
 
             // Ensure coefficient is in [0, q)
-            if (mpz_sgn(arr[i].coeffs[j]) < 0 || mpz_cmp(arr[i].coeffs[j], *QQ) >= 0) {
-                mpz_mod(arr[i].coeffs[j], arr[i].coeffs[j], *QQ);
+            if (mpz_sgn(arr[i].coeffs[j]) < 0 || mpz_cmp(arr[i].coeffs[j], QQ) >= 0) {
+                mpz_mod(arr[i].coeffs[j], arr[i].coeffs[j], QQ);
             }
 
             // How many bytes would be written (with size=1)?
@@ -570,7 +586,7 @@ void Hash(poly arr[K], uint8_t *hash)
                 // Still too big: reduce again or treat as error
                 // (shouldn’t happen if coeffs < q and coeff_bytes = ceil(bits(q)/8))
                 // Handle as needed; here we clamp via mod and recompute.
-                mpz_mod(arr[i].coeffs[j], arr[i].coeffs[j], *QQ);
+                mpz_mod(arr[i].coeffs[j], arr[i].coeffs[j], QQ);
                 written = 0;
                 mpz_export(NULL, &written, 1, 1, 1, 0, arr[i].coeffs[j]);
                 if (written > coeff_bytes) {

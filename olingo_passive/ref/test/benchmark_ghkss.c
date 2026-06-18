@@ -9,8 +9,10 @@
 #include "ghkss_inputs.h"
 #include "../poly256.h"
 #include <assert.h>
-#include "cpucycles.h"
+// #include "cpucycles.h"
 #include "../GHKSS256.h"
+#include "../gaussian_ref.h"
+#include "cpucycles.h"
 
 static inline void keygen_wrapper(keygen_input_t *in)
 {

@@ -1,9 +1,10 @@
 #ifndef REDUCE_H
 #define REDUCE_H
 
-#include <gmp.h>
 #include "params.h"
+#include <gmp.h>
 
+void poly_init_mont(void);
 
 void montgomery_reduce(mpz_t r, mpz_t a);
 

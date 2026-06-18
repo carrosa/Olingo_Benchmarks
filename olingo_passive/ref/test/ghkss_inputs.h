@@ -6,6 +6,7 @@
 #include "../poly256.h"
 #include "stdlib.h"
 #include "string.h"
+#include "../gaussian_ref.h"
 
 // =====================
 // KEYGEN

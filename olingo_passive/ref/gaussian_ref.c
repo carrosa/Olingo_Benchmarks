@@ -55,7 +55,9 @@ static const uint64_t EXP_COFF[] = {0x3e833b70ffa2c5d4,
 
 static const __m128d V_K_2_INV = {BINARY_SAMPLER_K_2_INV, 0};
 
-#define BENCHMARK_ITERATION 1000
+#ifndef BENCHMARK_ITERATION
+#define BENCHMARK_ITERATION 5
+#endif
 
 /* constant time CDT sampler */
 static inline uint64_t cdt_sampler(unsigned char *r)
@@ -144,7 +146,7 @@ static inline void uniform_sampler(unsigned char *r, uint64_t *y)
  * then do the rejection */
 void gaussian_sampler(mpz_t *sample, uint32_t slen)
 {
-	uint64_t x, y[8], z, b_in, b;
+	uint64_t x, y[8], z, b;
 
 	unsigned char r[8 * (CDT_ENTRY_SIZE + BERNOULLI_ENTRY_SIZE) + UNIFORM_REJ * UNIFORM_SIZE + 1];
 
