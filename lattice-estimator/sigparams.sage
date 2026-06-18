@@ -19,8 +19,8 @@ small_sig = 0
 
 # threshold sizes
 
-n = 1024
-t = 1023
+n = 32
+t = 31
 
 print("Threshold (n, t)=", "(", n, ",", t,")")
 
@@ -54,6 +54,9 @@ while (2 * exp((-tail_bound**2) / 2)) > rej_rate:
 
 while ((tail_bound_2**ringdim)*exp((ringdim/2)*(1-tail_bound_2^2))) > rej_rate:
     tail_bound_2 = tail_bound_2 + 0.01
+
+print(tail_bound)
+print(tail_bound_2)
 
 
 # Total number of signatures
@@ -91,8 +94,6 @@ if balanced == 1:
 	#print("first term bits = ",log(nu*2**(kappa_y),2).n())
 	#print("second term bits = ",log(2**(kappa_w+1),2).n())
 
-# Gaussian widths for s and r, set according to Raccoon analysis
-
 
 
 print("----------------------------------------------------------------------------------------------")
@@ -107,6 +108,7 @@ print("Optimised sigma_w = ", log(sigma_w,2).n(), " bits")
 
 
 print("----------------------------------------------------------------------------------------------")
+
 print("Assert: sigma_y <= sigma_w/nu")
 print("Assert LHS =", log(sigma_y,2).n())
 print("Assert RHY =", log(sigma_w/nu,2).n())
@@ -119,6 +121,7 @@ B_HMLWE = Q * nu * (1+ringdim*(secpar+1+2 * log(ringdim,2))/sqrt(Q))
 # Gaussian width for MLWE security
 
 sigma = sqrt(1/(2/(n*sigma_y**2) + 2*B_HMLWE/(t*sigma_w**2)))
+print("sigma =", log(sigma,2).n())
 
 # 2-norm bound of signature z
 
@@ -137,6 +140,8 @@ B_MSIS = B_STMSIS - nu #Following Raccoon parameter selection recommendation
 #print("B_MSIS bits =", log(B_MSIS,2).n())
 
 B_inf =  sqrt(ringdim) * tail_bound * sigma_y * sqrt(n) + tail_bound * sigma_w * sqrt(t)
+
+
 
 # Setting signature Modulus
 

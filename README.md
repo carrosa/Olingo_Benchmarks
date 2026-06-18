@@ -114,4 +114,4 @@ The script used to estimate hardness with our selected parameters can be found i
 They depend on the lattice-estimator [github.com/malb/lattice-estimator](https://github.com/malb/lattice-estimator).
 
 # A warning to developers:
-__WARNING__: This is an academic proof of concept/benchmarking, and in particular has not received code review. This implementation is NOT ready for any type of production use.
+__WARNING__: This is an academic benchmarking, and in particular has not received code review. This implementation is NOT ready for any type of production use and is not a full implementation of Olingo, but used for benchmarking purposes only to receive an estimate of how Olingo would perform in a full-scale implementation.
