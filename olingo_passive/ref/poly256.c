@@ -638,24 +638,89 @@ void Hash(poly arr[K], uint8_t *hash)
 //     free(buf);
 // }
 
-void H0_matrix(poly *arr, size_t rows, size_t cols, uint8_t *hash)
+// void H0_matrix(const poly *arr, size_t rows, size_t cols, uint8_t *hash)
+// {
+//     keccak_state state;
+//     shake256_init(&state);
+
+//     size_t coeff_bytes = (mpz_sizeinbase(GMP_Q, 2) + 7) / 8;
+//     size_t total_len = rows * cols * N * coeff_bytes;
+
+//     uint8_t *buf = calloc(1, total_len);
+//     if (buf == NULL)
+//         abort();
+
+//     for (size_t i = 0; i < rows * cols; i++)
+//     {
+//         for (size_t j = 0; j < N; j++)
+//         {
+//             size_t offset = (i * N + j) * coeff_bytes;
+//             mpz_export(buf + offset, NULL, 1, coeff_bytes, 1, 0, arr[i].coeffs[j]);
+//         }
+//     }
+
+//     shake256_absorb(&state, buf, total_len);
+//     shake256_finalize(&state);
+//     shake256_squeeze(hash, 32, &state);
+
+//     // free(buf);
+// }
+
+void H0_matrix(const poly *arr, size_t rows, size_t cols, uint8_t *hash)
 {
     keccak_state state;
     shake256_init(&state);
 
-    size_t coeff_bytes = (mpz_sizeinbase(GMP_Q, 2) + 7) / 8;
-    size_t total_len = rows * cols * N * coeff_bytes;
+    mpz_srcptr QQ = GMP_Q;  // or GMP_q if that is your actual modulus
 
-    uint8_t *buf = malloc(total_len);
-    if (!buf)
+    const size_t qbits = mpz_sizeinbase(QQ, 2);
+    const size_t coeff_bytes = (qbits + 7) / 8;
+    const size_t total_polys = rows * cols;
+    const size_t total_len = total_polys * N * coeff_bytes;
+
+    uint8_t *buf = calloc(1, total_len);
+    if (buf == NULL) {
         abort();
+    }
 
-    for (size_t i = 0; i < rows * cols; i++)
-    {
-        for (size_t j = 0; j < N; j++)
-        {
-            size_t offset = (i * N + j) * coeff_bytes;
-            mpz_export(buf + offset, NULL, 1, coeff_bytes, 1, 0, arr[i].coeffs[j]);
+    mpz_t tmp;
+    mpz_init(tmp);
+
+    for (size_t i = 0; i < total_polys; i++) {
+        for (size_t j = 0; j < N; j++) {
+            uint8_t *slot = buf + (i * N + j) * coeff_bytes;
+
+            /*
+             * Canonicalize coefficient into [0, q)
+             * without modifying arr.
+             */
+            mpz_mod(tmp, arr[i].coeffs[j], QQ);
+
+            size_t written = 0;
+
+            /*
+             * Ask how many bytes are needed.
+             * size = 1 means byte-wise export.
+             */
+            mpz_export(NULL, &written, 1, 1, 1, 0, tmp);
+
+            if (written > coeff_bytes) {
+                mpz_clear(tmp);
+                free(buf);
+                abort();
+            }
+
+            /*
+             * Left-pad with zeros to fixed width.
+             * calloc already zeroed the buffer.
+             */
+            mpz_export(slot + (coeff_bytes - written),
+                       NULL,
+                       1,
+                       1,
+                       1,
+                       0,
+                       tmp);
         }
     }
 
@@ -663,7 +728,8 @@ void H0_matrix(poly *arr, size_t rows, size_t cols, uint8_t *hash)
     shake256_finalize(&state);
     shake256_squeeze(hash, 32, &state);
 
-    // free(buf);
+    mpz_clear(tmp);
+    free(buf);
 }
 
 void get_random_dummy_poly(poly *p)

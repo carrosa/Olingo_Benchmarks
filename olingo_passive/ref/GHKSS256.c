@@ -144,7 +144,7 @@ void gen_sharing_poly(poly (*P_coeff)[LHAT][M], poly (*S)[M]) {
   gen_randomness(seed);
 
   for (int i = 0; i < LHAT; i++) {
-    fast_polyvec_copy(&P_coeff[0][i], &S[i], M); // Copy S to P_coeff[0]
+    fast_polyvec_copy(P_coeff[0][i], S[i], M); // Copy S to P_coeff[0]
   }
 
   for (int k = 1; k < THRESHOLD; k++) {
@@ -1074,6 +1074,7 @@ void dk_gen_1(poly (*Ae)[LHAT], // Ae: KHAT x LHAT
   // Compute Bi = pke.A * Si + q* Ei
   for (int i = 0; i < KHAT; i++) {
     for (int k = 0; k < M; k++) {
+      poly_zero(&Bi[i][k]);
       for (int j = 0; j < LHAT; j++) {
         poly_zero(&tmp);
         poly_pointwise_montgomery(&tmp, &Ae[i][j], &Si[j][k]);
@@ -1095,7 +1096,7 @@ void dk_gen_1(poly (*Ae)[LHAT], // Ae: KHAT x LHAT
   poly_clear(&t);
 
   // Hash Bi
-  H0_matrix(Bi, KHAT, M, h_Bi);
+  H0_matrix(*Bi, KHAT, M, h_Bi);
 }
 
 static void poly_matmul_acc(poly (*out)[M],  // [KHAT][M]
@@ -1130,7 +1131,7 @@ void dk_gen_2(poly (*Si)[M],    // [LHAT][M]
   // send in real application, will be big
   poly(*Shares_S)[M] = malloc(sizeof(poly) * LHAT * M); // [LHAT][M]
   poly(*Shares_E)[M] = malloc(sizeof(poly) * KHAT * M); // [KHAT][M]
-  poly(*Bij)[M] = malloc(sizeof(poly) * KHAT * M);      // [USERS][KHAT][M]
+  poly(*Bij)[M] = malloc(sizeof(poly) * KHAT * M);      // [USERS][KHAT][M] in real impl
 
   POLY_2D_INIT(Shares_S, LHAT, M);
   POLY_2D_INIT(Shares_E, KHAT, M);
@@ -1167,9 +1168,9 @@ void dk_gen_2(poly (*Si)[M],    // [LHAT][M]
   // Clear temporary sharing polynomials
   poly_1d_clear((poly *)P_coeff_S, THRESHOLD * LHAT * M);
   poly_1d_clear((poly *)P_coeff_E, THRESHOLD * KHAT * M);
-  poly_1d_clear(Shares_S, LHAT * M);
-  poly_1d_clear(Shares_E, KHAT * M);
-  poly_1d_clear(Bij, KHAT * M);
+  poly_1d_clear(*Shares_S, LHAT * M);
+  poly_1d_clear(*Shares_E, KHAT * M);
+  poly_1d_clear(*Bij, KHAT * M);
   free(P_coeff_S);
   free(P_coeff_E);
   free(Shares_S);

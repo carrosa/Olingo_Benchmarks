@@ -20,7 +20,7 @@ void H1(poly arr[K], uint8_t *hash);
 
 void Hash(poly arr[K], uint8_t *hash);
 
-void H0_matrix(poly *arr, size_t rows, size_t cols, uint8_t *hash);
+void H0_matrix(const poly *arr, size_t rows, size_t cols, uint8_t *hash);
 
 int polycmp(const poly *p1, const poly *p2);
 void poly_init(poly *p);
