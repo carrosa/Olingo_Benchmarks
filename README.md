@@ -77,6 +77,13 @@ FLINT is usually included in package managers and can be easily installed in mos
 
 To build NFLLib, run the following inside a cloned version of this repository:
 
+**Note w.r.t. CMake 4:** The flag 
+```
+-DCMAKE_POLICY_VERSION_MINIMUM=3.5
+```
+is required with CMake 4.
+
+
 ```
 $ mkdir deps
 $ cd deps
