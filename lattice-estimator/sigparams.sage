@@ -19,12 +19,12 @@ small_sig = 0
 
 # threshold sizes
 
-n = 32
-t = 31
+n = 1024
+t = 1023
 
 print("Threshold (n, t)=", "(", n, ",", t,")")
 
-# ring dimension, module dimension, sec dimension, tail bound
+# ring dimension, module dimension, sec dimension
 
 ringdim = 256
 
