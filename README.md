@@ -37,6 +37,8 @@ bash build.sh --users=<int> --threshold=<int>
 ```
 
 ## Benchmarks used for tables
+Benchmarks should be built using full threshold, e.g. t = n-1.
+
 ### Communication Size Table
 
 The communication sizes are computed manually. The sizes of the LNP proofs are taken from the output produced by the Lazer library.
