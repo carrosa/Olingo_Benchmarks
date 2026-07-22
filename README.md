@@ -36,6 +36,42 @@ Or, you can build all benchmarking files for one set of users and threshold usin
 bash build.sh --users=<int> --threshold=<int>
 ```
 
+## Benchmarks used for tables
+### Communication Size Table
+
+The communication sizes are computed manually. The sizes of the LNP proofs are taken from the output produced by the Lazer library.
+
+### Key Generation Timing Table
+
+The key-generation timings include the passive executions of `KGenE` and `KGenS`, together with the associated NIZKs.
+
+The included proofs are:
+
+- $\pi_{\mathrm{KGenE}}$: the norm-bound proof implemented in Lazer as `dkg_prf1`;
+- $\pi_{s_i}$: implemented in Lazer;
+- LIN codeword proof: implemented as `DKG lin proof 2` in the `lin_proofs__bdlop/` directory;
+- LIN Lagrange proof: implemented as `DKG lin proof 3` in the `lin_proofs__bdlop/` directory.
+
+The timings for the two LIN proofs correspond to a single execution. To obtain the total protocol cost, the timings must be scaled as follows:
+
+- LIN codeword proof: multiply by $21$;
+- LIN Lagrange proof: multiply by $21 \times 15$.
+
+### Signing Timing Table
+
+The signing benchmark is divided into the following stages:
+
+- **S1:** passive signing scheme;
+- **S2:** passive signing scheme together with $\pi_r$, implemented in Lazer;
+- **S3:** passive signing scheme together with $\pi_{dsi}$;
+- **Comb/Verify:** passive combination and verification procedures.
+
+The proof $\pi_{dsi}$ consists of:
+
+- a norm-bound proof implemented in Lazer as `bnd_E_prf`;
+- a LIN proof implemented as `Sign round 3 linearity proof` in the `lin_proofs__bdlop/` directory.
+
+
 ### NTT
 To compute zeta values for NTT, we used the script `compute_zetas.py` which has dependencies:
 - sage
